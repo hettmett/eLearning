@@ -1,0 +1,108 @@
+/* default styles */
+
+html[xmlns] .clearfix {
+	display: block;
+}
+* html .clearfix {
+	height: 1%;
+}
+
+*{ -webkit-padding-start: 0px; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, cite, code,
+del, dfn, em, ins, kbd, q, s, samp,
+strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-size: 100%;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+@font-face{
+	font-family: 'LatoBold';
+    src: url("../fonts/Lato/LatoBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face{
+	font-family: 'LatoRegular';
+    src: url("../fonts/Lato/LatoRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body {
+	color: #323232;
+	background-color: #fff;
+	font-family: 'LatoRegular';
+	line-height: 1.6;
+  	width: 100%;
+}
+
+body, p {
+	font-size: 16px;
+}
+
+h1, h2, h3, h4 {
+	margin: 0;
+	line-height: 1.6;
+	font-family: 'LatoBold';
+	color: #000;
+} 
+
+a, a:visited, a:link, a:active, a:focus{
+	outline:none;
+	/*color: ;*/	
+	background-color: transparent;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a:hover, a:focus, a:visited {
+	background-color: inherit!important;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+a img, img {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	display: block;
+	margin: auto;
+	vertical-align: middle;
+}
+
+ul, ol {  
+	list-style-position: inside;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+header{
+
+}
+
+footer{
+	
+}
