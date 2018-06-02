@@ -1,9 +1,7 @@
 from flask import Flask
 from config import conf
 # from com.auth.route import auth
-# base
-# db  connection
-# 
+
 
 app = Flask(__name__)
 
