@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 print('Creating Database schema at: {}'.format(datetime.now()))
-con = sqlite3.connect("app.db")
+con = sqlite3.connect("../src/app.db")
 cur = con.cursor()
 
 try:
@@ -11,10 +11,10 @@ try:
         CREATE TABLE IF NOT EXISTS users(
             id integer PRIMARY KEY,
             email text,
-            pwd text,
-            f_name text,
-            l_name text,
-            m_name text,
+            password text,
+            first_name text,
+            last_name text,
+            middle_name text,
             birth_date text,
             role text,
             create_date text DEFAULT (datetime('now','localtime')),
