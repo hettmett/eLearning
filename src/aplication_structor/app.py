@@ -4,7 +4,7 @@ from config import conf
 
 
 app = Flask(__name__)
-
+app.register_blueprint(auth, )
 # register blueprints for components
 # app.register_blueprint(auth, url_prefix='/auth')
 
