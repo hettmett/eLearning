@@ -16,7 +16,7 @@ try:
             l_name text,
             m_name text,
             birth_date text,
-            education text,
+            role text,
             create_date text DEFAULT (datetime('now','localtime')),
             token text
         );
