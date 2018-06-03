@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 print('Creating Database schema at: {}'.format(datetime.now()))
-con = sqlite3.connect("../src/app.db")
+con = sqlite3.connect("app.db")
 cur = con.cursor()
 
 try:
