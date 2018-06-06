@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>App - {% block title %}{% endblock %}</title>
-		<meta charset = "utf-8"/>
-		<meta http-equiv = "X-UA-Compatible" content = "IE=edge"/>
-		<meta name = "viewport" content = "width=device-width, initial-scale = 1"/>
+<head>
+    <title>App - {% block title %}{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1"/>
 
-		<link rel = "stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/fontawesome/css/font-awesome.css') }}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='fonts/fontawesome/css/font-awesome.css') }}"/>
 
-		<link rel = "stylesheet" type = "text/css" href = "{{ url_for( 'static', filename = 'css/bootstrap.min.css' ) }}"/>
-		<link rel = "stylesheet" type = "text/css" href = "{{ url_for( 'static', filename = 'css/media.css' ) }}"/>
-		<link rel = "stylesheet" type = "text/css" href = "{{ url_for( 'static', filename = 'css/style.css' ) }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename = 'css/media.css' ) }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename = 'css/style.css' ) }}"/>
 
-		{% block css %}{% endblock %}
+    {% block css %}{% endblock %}
 
-		<link rel = "icon" type = "image/icon" href = "{{ url_for( 'static', filename = 'images/favicon.ico' ) }}"/>
+    <link rel="icon" type="image/icon" href="{{ url_for( 'static', filename = 'images/favicon.ico' ) }}"/>
 
-		<script type = "text/javascript" src = "{{ url_for( 'static', filename = 'js/jquery.js' ) }}"></script>
-		<script type = "text/javascript" src = "{{ url_for( 'static', filename = 'js/functions.js' ) }}"></script>
+    <script type="text/javascript" src="{{ url_for( 'static', filename = 'js/jquery.js' ) }}"></script>
+    <script type="text/javascript" src="{{ url_for( 'static', filename = 'js/functions.js' ) }}"></script>
 
-		{% block js %}{% endblock %}
-	</head>
-	
-	<body>
-		<header>{% include "partials/header.html" %}</header>
+    {% block js %}{% endblock %}
+</head>
 
-		<div class="content">{% block content %}{% endblock %}</div>
-        
-       	<footer>{% include "partials/footer.html" %}</footer>
-	</body>
+<body>
+
+<div class="container">
+    {% block exeption_flash %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ol>
+                    {% for message in messages %}
+                        <li class="alert alert-danger">{{ message }}</li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        {% endwith %}
+    {% endblock %}
+</div>
+
+<header>{% include "partials/header.html" %}</header>
+
+<div class="content">{% block content %}{% endblock %}</div>
+
+<footer>{% include "partials/footer.html" %}</footer>
+</body>
 </html>

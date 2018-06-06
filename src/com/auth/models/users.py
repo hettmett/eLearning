@@ -1,12 +1,8 @@
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
-
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String
+from src.models.base import Base
 
 
-class User(Base):
+class Users(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, unique=True)
@@ -47,10 +43,3 @@ class User(Base):
             self.birth_date, self.role, self.token, self.rate,
             self.created, self.modified
         )
-    
-#
-# user = User(email='gmail@mail.ru', password='4321', last_name='lnm2', first_name='fnm2', middle_name='mnm2',
-#             birth_date='10-10-2000', role='student', token='564231a21we456erg2fh5t6y42f3dt56u4hg145',
-#             created=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-# session.add(user)
-# session.commit()

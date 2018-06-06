@@ -6,7 +6,7 @@ def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if session.get('user_id'):
-            return func(*args, *kwargs)
+            return func(*args, **kwargs)
         flash('Please login')
         return redirect(url_for('auth.login'))
 

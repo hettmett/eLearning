@@ -1,12 +1,13 @@
 from flask import Flask
-from config import conf
-# from com.auth.route import auth
+from src.config import conf
+from src.com.auth.routes import auth
+from src.com.homeworks.routes import homeworks
 
 
 app = Flask(__name__)
-app.register_blueprint(auth, )
-# register blueprints for components
-# app.register_blueprint(auth, url_prefix='/auth')
+app.secret_key = conf['security']['SECRET_KEY']
+app.register_blueprint(auth)
+app.register_blueprint(homeworks)
 
 
 if __name__ == '__main__':

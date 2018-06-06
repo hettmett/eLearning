@@ -1,10 +1,11 @@
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
-from auth import login_required
-from .loginController import UserController
+from src.com.auth import login_required
+from src.com.auth.auth_controller import AuthController
+
 
 auth = Blueprint('auth', __name__, template_folder='templates', static_folder='static')
-user = UserController()
+user = AuthController()
 
 
 @auth.route('/')
@@ -27,7 +28,7 @@ def login():
                 flash(f"[{email}]logged in successfully !")
                 return redirect(url_for('auth.index'))
             else:
-                raise Exception(f"<<{email}>> user not found !!!")
+                raise Exception(f"`{email}` user not found !!!")
         except Exception as ex:
             flash(str(ex))
     return render_template('login.html')
@@ -40,8 +41,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-# NAREK ******************************************************
-
+# NAREK ***************************************************************
 @auth.route('/create_user', methods=["GET", "POST"])
 def create_user():
     if request.method == "POST":
@@ -49,7 +49,16 @@ def create_user():
         last_name = request.form.get('last_name')
         email = request.form.get('email')
         role = request.form.get('role')
-        user.add_user(first_name, last_name, email, role)
+        try:
+            if len(first_name) == 0:
+                raise Exception('first_name required')
+            if len(last_name) == 0:
+                raise Exception('last_name required')
+            if not user.is_valid_email(email):
+                raise Exception('email not valid')
+            user.add_user(first_name, last_name, email, role)
+        except Exception as ex:
+            flash(ex)
     return render_template("create_user.html")
 
 
@@ -68,9 +77,16 @@ def reset_password(token=None, id=None):
     if request.method == "POST":
         password = request.form.get('password')
         rep_password = request.form.get('repeat_password')
-        if password == rep_password:
-            user.change_password(id, password)
-            return redirect(url_for('auth.index'))
-        else:
-            flash('The password does not match. Please try again.')
+        try:
+            if len(password) < 6:
+                raise Exception('password required')
+            if len(rep_password) < 6:
+                raise Exception('rep_password required')
+            if password == rep_password:
+                user.change_password(id, password)
+                return redirect(url_for('auth.login'))
+            else:
+                raise Exception('The password does not match. Please try again.')
+        except Exception as ex:
+            flash(ex)
     return render_template('reset_password.html')
