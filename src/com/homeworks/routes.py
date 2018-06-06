@@ -20,19 +20,14 @@ def show_all():
 def new():
     if request.method == 'POST':
         form = request.form
+        lesson_id = form.get('lesson_id')
+        title = form.get('title')
+        description = form.get('description')
+        file_path = form.get('file_path')
+        deadline = form.get('deadline')
+        created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         try:
-            lesson_id = form.get('lesson_id')
-            title = form.get('title')
-            description = form.get('description')
-            file_path = form.get('file_path')
-            deadline = form.get('deadline')
-            created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-            fields = [lesson_id, title, description, file_path, deadline, created]
-            for i, field in enumerate(fields):
-                if 0 > len(field) > 255:
-                    raise Exception(f"{fields[i]} not required !")
-            HomeworksController().new(fields)
+            HomeworksController().new(lesson_id, title, description, file_path, deadline, created)
             return redirect(url_for('homeworks.show_all'))
         except Exception as ex:
             flash(ex)
@@ -58,7 +53,7 @@ def edit(id):
             fields_list = [lesson_id, title, description, file_path, deadline, modified]
             for i, field in enumerate(fields_list):
                 if 0 > len(field) > 255:
-                    raise Exception(f"{field} not required !")
+                    raise Exception(f"{field} required !")
             HomeworksController().edit(fields_list, fields.id)
             return redirect(url_for('homeworks.show_all'))
         except Exception as ex:
