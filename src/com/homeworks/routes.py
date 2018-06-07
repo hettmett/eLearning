@@ -1,8 +1,9 @@
 from flask import Blueprint
 from datetime import datetime
 from flask import render_template, request, url_for, flash, redirect
-from src.com.homeworks.homeworks_controller import HomeworksController
+from src.com.homeworks.controller import HomeworksController
 from src.com.auth import login_required
+
 
 homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks', template_folder='templates',
                       static_folder='static')
@@ -11,7 +12,7 @@ homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks', template_f
 @homeworks.route('/')
 @login_required
 def show_all():
-    all = HomeworksController().get_all()
+    all = HomeworksController().all()
     return render_template('show_all.html', homeworks=all)
 
 

@@ -5,7 +5,7 @@ class HomeworksController(object):
     def __init__(self):
         pass
 
-    def get_all(self):
+    def all(self):
         return Homeworks.all()
 
     def new(self, lesson_id, title, description, file_path, deadline, created):
