@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from src.models.base import Base
+from src.models.base import Base, DB
 
 
 class Users(Base):
@@ -43,3 +43,7 @@ class Users(Base):
             self.birth_date, self.role, self.token, self.rate,
             self.created, self.modified
         )
+
+    @staticmethod
+    def get_role(id: int):
+        return DB.query(Users.role).filter(Users.id == id).first()
