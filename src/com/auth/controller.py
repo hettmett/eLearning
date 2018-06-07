@@ -11,6 +11,12 @@ class AuthController(object):
         super().__init__()
 
     def login(self, email: str, pwd: str):
+        if len(email) == 0:
+            raise Exception('Email required')
+        if not self.is_valid_email(email):
+            raise Exception('Email not valid')
+        if len(pwd) == 0:
+            raise Exception('Password required')
         user = Users.login(email, pwd)
         if user is not None:
             session['user_id'] = user.id
@@ -36,12 +42,15 @@ class AuthController(object):
 
     def new(self, fields):
         if len(fields[0]) == 0:
-            raise Exception('first_name required')
+            raise Exception('First name required')
         if len(fields[1]) == 0:
-            raise Exception('last_name required')
-        if not AuthController().is_valid_email(fields[2]):
-            raise Exception('email not valid')
+            raise Exception('Last name required')
+        if len(fields[2]) == 0:
+            raise Exception('Email required')
+        if not self.is_valid_email(fields[2]):
+            raise Exception('Email not valid')
         user = Users.new(fields)
+        print(user.email)
         self.send_mail(user.email, user.token)
         return
 

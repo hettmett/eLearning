@@ -16,13 +16,9 @@ def index():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        email = request.form.get('email').strip().strip('\n')
+        password = request.form.get('password').strip().strip('\n')
         try:
-            email = request.form.get('email').strip().strip('\n')
-            password = request.form.get('password').strip().strip('\n')
-            if email == '' or len(email) > 30:
-                raise Exception('email not required')
-            if password == '' or len(password) > 20:
-                raise Exception('password is required')
             if AuthController().login(email, password):
                 flash(f"{email} logged in successfully")
                 return redirect(url_for('auth.index'))
@@ -43,10 +39,10 @@ def logout():
 @auth.route('/users/new', methods=["GET", "POST"])
 def new():
     if request.method == "POST":
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        email = request.form.get('email')
-        role = request.form.get('role')
+        first_name = request.form.get('first_name').strip().strip('\n')
+        last_name = request.form.get('last_name').strip().strip('\n')
+        email = request.form.get('email').strip().strip('\n')
+        role = request.form.get('role').strip().strip('\n')
         fields = [first_name, last_name, email, role]
         try:
             AuthController().new(fields)
@@ -67,13 +63,13 @@ def sign_up(token):
 @auth.route('/reset-password/<token>/<id>', methods=["GET", "POST"])
 def reset_password(token=None, id=None):
     if request.method == "POST":
-        password = request.form.get('password')
-        rep_password = request.form.get('repeat_password')
+        password = request.form.get('password').strip().strip('\n')
+        rep_password = request.form.get('repeat_password').strip().strip('\n')
         try:
-            if len(password) < 6:
-                raise Exception('password required')
-            if len(rep_password) < 6:
-                raise Exception('rep_password required')
+            if len(password) == 0:
+                raise Exception('Password required')
+            if len(rep_password) == 0:
+                raise Exception('Repeat password required')
             if password == rep_password:
                 AuthController().change_password(id, password)
                 return redirect(url_for('auth.login'))

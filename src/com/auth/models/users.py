@@ -56,13 +56,15 @@ class Users(Base):
     @staticmethod
     def new(fields: list):
         try:
-            DB.add(Users(
+            user = Users(
                 first_name=fields[0],
                 last_name=fields[1],
                 email=fields[2],
                 role=fields[3],
                 token=str(uuid4()),
-                created=datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+                created=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            DB.add(user)
+            return user
         except:
             DB.rollback()
 
