@@ -1,11 +1,10 @@
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
 from src.com.auth import login_required
-from src.com.auth.auth_controller import AuthController
+from src.com.auth.controller import AuthController
 
 
-auth = Blueprint('auth', __name__, template_folder='templates', static_folder='static')
-user = AuthController()
+auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
 
 @auth.route('/')
@@ -18,17 +17,17 @@ def index():
 def login():
     if request.method == 'POST':
         try:
-            email = request.form.get('email').strip().strip('\n\t').strip()
-            password = request.form.get('password').strip().strip('\n\t').strip()
+            email = request.form.get('email').strip().strip('\n')
+            password = request.form.get('password').strip().strip('\n')
             if email == '' or len(email) > 30:
                 raise Exception('email not required')
             if password == '' or len(password) > 20:
                 raise Exception('password is required')
-            if user.user_login(email, password):
-                flash(f"[{email}]logged in successfully !")
+            if AuthController().login(email, password):
+                flash(f"{email} logged in successfully")
                 return redirect(url_for('auth.index'))
             else:
-                raise Exception(f"`{email}` user not found !!!")
+                raise Exception(f"`{email}` user not found !")
         except Exception as ex:
             flash(str(ex))
     return render_template('login.html')
@@ -41,22 +40,16 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-# NAREK ***************************************************************
-@auth.route('/create_user', methods=["GET", "POST"])
-def create_user():
+@auth.route('/users/new', methods=["GET", "POST"])
+def new():
     if request.method == "POST":
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
         email = request.form.get('email')
         role = request.form.get('role')
+        fields = [first_name, last_name, email, role]
         try:
-            if len(first_name) == 0:
-                raise Exception('first_name required')
-            if len(last_name) == 0:
-                raise Exception('last_name required')
-            if not user.is_valid_email(email):
-                raise Exception('email not valid')
-            user.add_user(first_name, last_name, email, role)
+            AuthController().new(fields)
         except Exception as ex:
             flash(ex)
     return render_template("create_user.html")
@@ -64,15 +57,14 @@ def create_user():
 
 @auth.route('/<token>', methods=["GET", "POST"])
 def sign_up(token):
-    if user.check_token(token) != 0:
-        id = user.check_token(token)
+    if AuthController().check_token(token) != 0:
+        id = AuthController().check_token(token)
         return redirect(url_for('auth.reset_password', token=token, id=id))
     else:
         flash("token is incorrect")
-    return
 
 
-@auth.route('/reset_password/<token>/<id>', methods=["GET", "POST"])
+@auth.route('/reset-password/<token>/<id>', methods=["GET", "POST"])
 def reset_password(token=None, id=None):
     if request.method == "POST":
         password = request.form.get('password')
@@ -83,7 +75,7 @@ def reset_password(token=None, id=None):
             if len(rep_password) < 6:
                 raise Exception('rep_password required')
             if password == rep_password:
-                user.change_password(id, password)
+                AuthController().change_password(id, password)
                 return redirect(url_for('auth.login'))
             else:
                 raise Exception('The password does not match. Please try again.')

@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container">
-        <form class="form-horizontal" method="POST" action="/create_user">
+        <form class="form-horizontal" method="POST">
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -49,10 +49,10 @@
                 <div class="col-md-4">
                     <label class="control-label">Select role: </label>
                     <select name="role">
-                    <option value="admin">Admin</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student" selected >Student</option>
-                </select>
+                        <option value="admin">Admin</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="student" selected>Student</option>
+                    </select>
                 </div>
             </div>
             <div class="row" style="padding-top: 1rem">

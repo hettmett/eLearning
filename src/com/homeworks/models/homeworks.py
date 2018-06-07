@@ -22,15 +22,15 @@ class Homeworks(Base):
             DB.rollback()
 
     @staticmethod
-    def new(lesson_id, title, description, file_path, deadline, created):
+    def new(fields: list):
         try:
             DB.add(Homeworks(
-                lesson_id=lesson_id,
-                title=title,
-                description=description,
-                file_path=file_path,
-                deadline=deadline,
-                created=created))
+                lesson_id=fields[0],
+                title=fields[1],
+                description=fields[2],
+                file_path=fields[3],
+                deadline=fields[4],
+                created=fields[5]))
             DB.commit()
         except:
             DB.rollback()

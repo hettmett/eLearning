@@ -16,11 +16,11 @@
                 </tr>
                 </thead>
                 <tr>
-                    <td><input type="text" class="form-control" name="lesson_id"></td>
-                    <td><input type="text" class="form-control" name="title"></td>
-                    <td><input type="text" class="form-control" name="description"></td>
-                    <td><input type="text" class="form-control" name="file_path"></td>
-                    <td><input type="date" class="form-control" name="deadline"></td>
+                    <td><input type="text" class="form-control" name="lesson_id" value="{{ fields[0] }}"></td>
+                    <td><input type="text" class="form-control" name="title" value="{{ fields[1] }}"></td>
+                    <td><input type="text" class="form-control" name="description" value="{{ fields[2] }}"></td>
+                    <td><input type="text" class="form-control" name="file_path" value="{{ fields[3] }}"></td>
+                    <td><input type="date" class="form-control" name="deadline" value="{{ fields[4] }}"></td>
                     <td>
                         <button class="btn btn-success">Create</button>
                     </td>
