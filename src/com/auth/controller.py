@@ -1,9 +1,9 @@
 import re
 from flask_mail import Mail, Message
 from flask import session, current_app as app
-from src.com.auth.models.users import Users
-from src.config import sys_conf
-from src.models.base import DB
+from com.auth.models.users import Users
+from config import sys_conf
+from models.base import DB
 
 
 class AuthController(object):
@@ -36,7 +36,7 @@ class AuthController(object):
             mail.send(msg)
         return "Sent"
 
-    def new(self, fields):
+    def add(self, fields):
         if len(fields[0]) == 0:
             raise Exception('First name required')
         if len(fields[1]) == 0:
@@ -45,7 +45,7 @@ class AuthController(object):
             raise Exception('Email required')
         if not self.is_valid_email(fields[2]):
             raise Exception('Email not valid')
-        user = Users.new(fields)
+        user = Users.add(fields)
         print(user.email)
         self.send_mail(user.email, user.token)
         return

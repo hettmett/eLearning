@@ -1,8 +1,8 @@
 from flask import Blueprint
 from datetime import datetime
 from flask import render_template, request, url_for, flash, redirect
-from src.com.homeworks.controller import HomeworksController
-from src.com.auth import login_required
+from com.homeworks.controller import HomeworksController
+from com.auth import login_required
 
 
 homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
@@ -18,7 +18,7 @@ def all():
 
 @homeworks.route('/new', methods=['GET', 'POST'])
 @login_required
-def new():
+def add():
     fields = []
     if request.method == 'POST':
         form = request.form
@@ -30,7 +30,7 @@ def new():
         created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         fields = [lesson_id, title, description, file_path, deadline, created]
         try:
-            HomeworksController().new(fields)
+            HomeworksController().add(fields)
             return redirect(url_for('homeworks.all'))
         except Exception as ex:
             flash(ex)
@@ -60,8 +60,8 @@ def edit(hw_id):
 
 @homeworks.route('/delete/<id>')
 @login_required
-def delete(id):
-    HomeworksController().delete(id)
+def remove(id):
+    HomeworksController().remove(id)
     return redirect(url_for('homeworks.all'))
 
 

@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
-from src.com.auth import login_required
-from src.com.auth.controller import AuthController
+from com.auth import login_required
+from com.auth.controller import AuthController
 
 
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
@@ -40,7 +40,7 @@ def logout():
 
 
 @auth.route('/users/new', methods=["GET", "POST"])
-def new():
+def add():
     if request.method == "POST":
         first_name = request.form.get('first_name').strip().strip('\n')
         last_name = request.form.get('last_name').strip().strip('\n')
@@ -48,7 +48,7 @@ def new():
         role = request.form.get('role').strip().strip('\n')
         fields = [first_name, last_name, email, role]
         try:
-            AuthController().new(fields)
+            AuthController().add(fields)
         except Exception as ex:
             flash(ex)
     return render_template("create_user.html")

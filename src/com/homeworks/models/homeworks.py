@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from src.models.base import Base, DB
+from models.base import Base, DB
 
 
 class Homeworks(Base):
@@ -22,7 +22,7 @@ class Homeworks(Base):
             DB.rollback()
 
     @staticmethod
-    def new(fields: list):
+    def add(fields: list):
         try:
             DB.add(Homeworks(
                 lesson_id=fields[0],
@@ -50,9 +50,9 @@ class Homeworks(Base):
             DB.rollback()
 
     @staticmethod
-    def delete(id: int):
+    def remove(id: int):
         try:
-            DB.delete(Homeworks.find_by_id(id))
+            DB.remove(Homeworks.find_by_id(id))
         except:
             DB.rollback()
 

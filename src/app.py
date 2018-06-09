@@ -1,7 +1,7 @@
 from flask import Flask
-from src.config import sys_conf, sec_conf
-from src.com.auth.routes import auth
-from src.com.homeworks.routes import homeworks
+from config import sys_conf, sec_conf
+from com.auth.routes import auth
+from com.homeworks.routes import homeworks
 
 
 app = Flask(__name__)

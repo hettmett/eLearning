@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from src.config import db_conf
+from config import db_conf
 
 
 Base = declarative_base()  # Base mapping class

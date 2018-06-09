@@ -1,5 +1,5 @@
 import re
-from src.com.homeworks.models.homeworks import Homeworks
+from com.homeworks.models.homeworks import Homeworks
 
 
 class HomeworksController(object):
@@ -9,15 +9,15 @@ class HomeworksController(object):
     def all(self):
         return Homeworks.all()
 
-    def new(self, fields: list):
+    def add(self, fields: list):
         self.form_is_valid(fields)
-        return Homeworks.new(fields)
+        return Homeworks.add(fields)
 
     def edit(self, fields: list, id: int):
         self.form_is_valid(fields)
         return Homeworks.edit(fields, id)
 
-    def delete(self, id: int):
+    def remove(self, id: int):
         return Homeworks.delete(id)
 
     def find_by_id(self, id):
