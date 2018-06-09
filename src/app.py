@@ -6,6 +6,8 @@ from src.com.homeworks.routes import homeworks
 
 app = Flask(__name__)
 app.secret_key = sec_conf['secret_key']
+
+# Registering Blueprints
 app.register_blueprint(auth)
 app.register_blueprint(homeworks)
 

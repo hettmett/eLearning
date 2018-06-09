@@ -11,12 +11,8 @@ class AuthController(object):
         super().__init__()
 
     def login(self, email: str, pwd: str):
-        if len(email) == 0:
-            raise Exception('Email required')
         if not self.is_valid_email(email):
             raise Exception('Email not valid')
-        if len(pwd) == 0:
-            raise Exception('Password required')
         user = Users.login(email, pwd)
         if user is not None:
             session['user_id'] = user.id
@@ -68,3 +64,7 @@ class AuthController(object):
             if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.""([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
                 return True
         return False
+
+    @staticmethod
+    def find_by_id(id: int):
+        return DB.query(Users.first_name, Users.last_name).filter(Users.id == id).first()

@@ -1,50 +1,48 @@
 {% extends "base.html" %}
-{% block title %} LogIn {% endblock %}
+{% block title %} Login {% endblock %}
+
+
+{% block top_menu %}
+{% endblock %}
+
+
+{% block left %}
+{% endblock %}
+
 
 {% block content %}
-    <div class="container">
-        <form class="form-horizontal" method="POST">
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <h2>Please Login</h2>
-                    <hr>
+    <!-- Row -->
+    <div class="auth-form  ml-auto mr-auto no-float">
+        <div class="row">
+            <div class="col-sm-8 col-xs-8">
+                <div class="mb-30">
+                    <h3 class="text-center txt-dark mb-10">Sign in to Droopy</h3>
+                    <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <div class="form-group has-danger">
-                        <label class="sr-only" for="email">E-Mail Address</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                            <input type="text" name="email" class="form-control"
-                                   placeholder="you@example.com" required autofocus>
+                <div class="form-wrap">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label class="control-label mb-10" for="exampleInputEmail_2">
+                                Email address
+                            </label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter email"
+                                   pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                                   required autofocus>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="sr-only" for="password">Password</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                            <input type="password" name="password" class="form-control"
-                                   placeholder="Password" required>
+                        <div class="form-group">
+                            <label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
+                            <div class="clearfix"></div>
+                            <input type="password" name="password" class="form-control" required autofocus
+                                   placeholder="Enter pwd">
                         </div>
-                    </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-success">Sign In</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="row" style="padding-top: 1rem">
-                <div class="col-md-5"></div>
-                <div class="col-md-3">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button>
-                    <a class="btn btn-link" href="/reset_password">Forgot Your Password?</a>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
+    <!-- /Row -->
 
 {% endblock %}

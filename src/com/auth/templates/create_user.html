@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block title %} Create new user {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <form class="form-horizontal" method="POST">
+    <div class="row">
+        <form method="POST">
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -39,6 +39,7 @@
                     <div class="form-group has-danger">
                         <div class="input-group mb-4 mr-sm-4 mb-sm-4">
                             <input type="text" name="email" class="form-control"
+                                   pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
                                    placeholder="you@example.com" required autofocus>
                         </div>
                     </div>
@@ -55,10 +56,10 @@
                     </select>
                 </div>
             </div>
-            <div class="row" style="padding-top: 1rem">
+            <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Register</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-registered"></i> Register</button>
                 </div>
             </div>
         </form>

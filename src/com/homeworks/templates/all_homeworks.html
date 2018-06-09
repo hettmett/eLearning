@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %} Last 10 homeworks {% endblock %}
+{% block user_name %} {{ user_name }} {% endblock %}
+
+{% block content %}
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h5 class="txt-dark">Homeworks DataTable</h5>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <table id="myTable1" class="table table-hover display  pb-30">
+                                <thead>
+                                <tr>
+                                    <th> ID</th>
+                                    <th> Lesson_ID</th>
+                                    <th> Title</th>
+                                    <th> Description</th>
+                                    <th> File path</th>
+                                    <th> Deadline</th>
+                                    <th> Created</th>
+                                    <th> Modified</th>
+                                    <th></th>
+                                    <th><a href="new" class="btn btn-primary mr-10">Create</a></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for homework in homeworks %}
+                                    <tr>
+                                        <td><a href="{{ homework.id }}"> {{ homework.id }} </a></td>
+                                        <td> {{ homework.lesson_id }} </td>
+                                        <td> {{ homework.title }} </td>
+                                        <td> {{ homework.description }} </td>
+                                        <td> {{ homework.file_path }} </td>
+                                        <td> {{ homework.deadline }} </td>
+                                        <td> {{ homework.created }} </td>
+                                        <td> {{ homework.modified }} </td>
+                                        <td><a href="edit/{{ homework.id }}" class="btn btn-success" role="button">
+                                            Edit </a></td>
+                                        <td><a href="delete/{{ homework.id }}" class="btn btn-danger" role="button">
+                                            Delete </a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+
+{% endblock %}

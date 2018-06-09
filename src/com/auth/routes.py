@@ -10,14 +10,17 @@ auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='template
 @auth.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    id = int(session.get('user_id'))
+    user = AuthController.find_by_id(id)
+    user_name = f'{user[0]} {user[1]}'
+    return render_template('index.html', user_name=user_name)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email').strip().strip('\n')
-        password = request.form.get('password').strip().strip('\n')
+        email = request.form.get('email')
+        password = request.form.get('password')
         try:
             if AuthController().login(email, password):
                 flash(f"{email} logged in successfully")
