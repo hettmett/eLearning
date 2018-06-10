@@ -36,7 +36,7 @@ class Homeworks(Base):
             DB.rollback()
 
     @staticmethod
-    def edit(id: int, lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
+    def edit(id: int, lesson_id: int, title: str, description: str, file_path: str, deadline: str, modified: str):
         try:
             DB.query(Homeworks).filter(Homeworks.id == id).update(dict(
                 lesson_id=lesson_id,
@@ -44,7 +44,7 @@ class Homeworks(Base):
                 description=description,
                 file_path=file_path,
                 deadline=deadline,
-                created=created))
+                modified=modified))
             DB.commit()
         except:
             DB.rollback()

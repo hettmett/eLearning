@@ -9,13 +9,13 @@ class HomeworksController(object):
     def all(self):
         return Homeworks.all()
 
-    def add(self, fields: list):
-        self.form_is_valid(fields)
-        return Homeworks.new(fields)
+    def add(self, lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
+        self.form_is_valid(lesson_id, title, description, file_path, deadline)
+        return Homeworks.add(lesson_id, title, description, file_path, deadline, created)
 
-    def edit(self, fields: list, id: int):
-        self.form_is_valid(fields)
-        return Homeworks.edit(fields, id)
+    def edit(self, id: int, lesson_id: int, title: str, description: str, file_path: str, deadline: str, modified: str):
+        self.form_is_valid(lesson_id, title, description, file_path, deadline)
+        return Homeworks.edit(id, lesson_id, title, description, file_path, deadline, modified)
 
     def remove(self, id: int):
         return Homeworks.remove(id)
@@ -24,16 +24,16 @@ class HomeworksController(object):
         return Homeworks.find_by_id(id)
 
     @staticmethod
-    def form_is_valid(fields: list):
-        if len(fields[0].strip()) == 0:
+    def form_is_valid(lesson_id: int, title: str, description: str, file_path: str, deadline: str):
+        if len(str(lesson_id)) == 0:
             raise Exception('Lesson_id required')
-        if not re.match(re.compile("[0-9/*]"), fields[0].strip()):
+        if not re.match(re.compile("[0-9/*]"), str(lesson_id)):
             raise Exception('type Lesson_id INT')
-        if len(fields[1].strip()) == 0:
+        if len(title.strip()) == 0:
             raise Exception('Title required')
-        if len(fields[2].strip()) == 0:
+        if len(description.strip()) == 0:
             raise Exception('Description required')
-        if len(fields[3].strip()) == 0:
+        if len(file_path.strip()) == 0:
             raise Exception('File path required')
-        if len(fields[4].strip()) == 0:
+        if len(deadline.strip()) == 0:
             raise Exception('Deadline required')
