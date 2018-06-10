@@ -19,14 +19,15 @@
                                 <table id="myTable1" class="table table-hover display  pb-30">
                                     <thead>
                                     <tr>
-                                        <th scope="col"><label for="lesson_id">Lesson_Id</label>
-                                        <th scope="col"><label for="title">Title</label></th>
-                                        <th scope="col"><label for="description">Description</label></th>
-                                        <th scope="col"><label for="file_path">File path</label></th>
-                                        <th scope="col"><label for="deadline">Deadline</label></th>
-                                        <th scope="col"></th>
+                                        <th><label for="lesson_id">Lesson_Id</label>
+                                        <th><label for="title">Title</label></th>
+                                        <th><label for="description">Description</label></th>
+                                        <th><label for="file_path">File path</label></th>
+                                        <th><label for="deadline">Deadline</label></th>
+                                        <th><a href="/homeworks" class="btn btn-info"> Back </a></th>
                                     </tr>
                                     </thead>
+                                    <tbody>
                                     <tr>
                                         <td><input type="text" class="form-control" name="lesson_id"
                                                    value="{{ fields[0] }}" required autofocus></td>
@@ -42,6 +43,7 @@
                                             <button class="btn btn-success">Create</button>
                                         </td>
                                     </tr>
+                                    </tbody>
                                 </table>
                             </form>
                         </div>

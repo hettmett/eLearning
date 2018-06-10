@@ -12,12 +12,13 @@ def login_required(func):
     return wrapper
 
 
-def require_roles(*roles):
+def require_roles(*roles, page):
     def wrapper(func):
         @wraps(func)
         def wrapped(*args, **kwargs):
             if session['user']['role'] in roles:
                 return func(*args, **kwargs)
             flash('You do not have permission to access this page !')
+            return redirect(url_for(page))
         return wrapped
     return wrapper

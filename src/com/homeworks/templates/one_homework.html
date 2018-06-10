@@ -3,29 +3,41 @@
 
 {% block content %}
     <div class="row">
-        <form method="POST">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Lesson_Id</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">File path</th>
-                    <th scope="col">Deadline</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tr>
-                    <td><p>{{ homework.id }}</p></td>
-                    <td><p>{{ homework.lesson_id }}</p></td>
-                    <td><p>{{ homework.title }}</p></td>
-                    <td><p>{{ homework.description }}</p></td>
-                    <td><p>{{ homework.file_path }}</p></td>
-                    <td><p>{{ homework.deadline }}</p></td>
-                    <td><p><a href="/homeworks" class="btn btn-info"> Back </a></p></td>
-                </tr>
-            </table>
-        </form>
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <form method="POST">
+                                <table class="table table-striped ">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Lesson_Id</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">File path</th>
+                                        <th scope="col">Deadline</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><p>{{ homework.id }}</p></td>
+                                        <td><p>{{ homework.lesson_id }}</p></td>
+                                        <td><p>{{ homework.title }}</p></td>
+                                        <td><p>{{ homework.description }}</p></td>
+                                        <td><p>{{ homework.file_path }}</p></td>
+                                        <td><p>{{ homework.deadline }}</p></td>
+                                        <td><p><a href="/homeworks" class="btn btn-info"> Back </a></p></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

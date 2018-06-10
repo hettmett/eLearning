@@ -18,7 +18,7 @@ def all():
 
 @homeworks.route('/new', methods=['GET', 'POST'])
 @login_required
-@require_roles('teacher')
+@require_roles('teacher', page='homeworks.all')
 def add():
     fields = []
     if request.method == 'POST':
@@ -40,6 +40,7 @@ def add():
 
 @homeworks.route('/edit/<hw_id>/', methods=['GET', 'POST'])
 @login_required
+@require_roles('teacher', page='homeworks.all')
 def edit(hw_id):
     homework = HomeworksController().find_by_id(hw_id)
     if request.method == 'POST':
@@ -61,6 +62,7 @@ def edit(hw_id):
 
 @homeworks.route('/delete/<id>')
 @login_required
+@require_roles('teacher', page='homeworks.all')
 def remove(id):
     HomeworksController().remove(id)
     return redirect(url_for('homeworks.all'))

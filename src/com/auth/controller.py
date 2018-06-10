@@ -49,6 +49,7 @@ class AuthController(object):
             raise Exception('Email required')
         if not self.is_valid_email(email):
             raise Exception('Email not valid')
+        print(first_name, last_name, email, role)
         user = Users.add(first_name, last_name, email, role)
         self.send_mail(user.email, user.token)
 

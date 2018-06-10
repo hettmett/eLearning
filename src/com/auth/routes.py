@@ -45,6 +45,7 @@ def add():
         last_name = request.form.get('last_name').strip().strip('\n')
         email = request.form.get('email').strip().strip('\n')
         role = request.form.get('role').strip().strip('\n')
+        print(first_name, last_name, email, role)
         try:
             AuthController().add(first_name, last_name, email, role)
         except Exception as ex:
