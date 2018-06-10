@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='template
 @auth.route('/')
 @login_required
 def index():
-    user_name = f"{session['user']['fnm']} {session['user']['fnm']}"
+    user_name = f"{session['user']['fnm']} {session['user']['lnm']}"
     return render_template('index.html', user_name=user_name)
 
 

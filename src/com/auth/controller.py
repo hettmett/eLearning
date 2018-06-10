@@ -3,7 +3,6 @@ from flask_mail import Mail, Message
 from flask import session, current_app as app
 from com.auth.models.users import Users
 from config import sys_conf
-from models.base import DB
 
 
 class AuthController(object):
