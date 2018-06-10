@@ -13,8 +13,8 @@ homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
 @login_required
 # @role_required('teacher', page='auth.index')
 def all():
-    all = HomeworksController().all()
-    return render_template('all_homeworks.html', homeworks=all)
+    homeworks = HomeworksController().all()
+    return render_template('all_homeworks.html', homeworks=homeworks)
 
 
 @homeworks.route('/new', methods=['GET', 'POST'])
