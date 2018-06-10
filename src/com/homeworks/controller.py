@@ -9,15 +9,15 @@ class HomeworksController(object):
     def all(self):
         return Homeworks.all()
 
-    def add(self, fields: list):
+    def new(self, fields: list):
         self.form_is_valid(fields)
-        return Homeworks.add(fields)
+        return Homeworks.new(fields)
 
     def edit(self, fields: list, id: int):
         self.form_is_valid(fields)
         return Homeworks.edit(fields, id)
 
-    def remove(self, id: int):
+    def delete(self, id: int):
         return Homeworks.delete(id)
 
     def find_by_id(self, id):

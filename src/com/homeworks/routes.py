@@ -2,7 +2,7 @@ from flask import Blueprint
 from datetime import datetime
 from flask import render_template, request, url_for, flash, redirect
 from com.homeworks.controller import HomeworksController
-from com.auth import login_required
+from com.auth import login_required, require_roles
 
 
 homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
@@ -18,6 +18,7 @@ def all():
 
 @homeworks.route('/new', methods=['GET', 'POST'])
 @login_required
+@require_roles('teacher')
 def add():
     fields = []
     if request.method == 'POST':
