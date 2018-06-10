@@ -7,7 +7,6 @@ from com.auth import login_required
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
 
-@auth.route('')
 @auth.route('/')
 @login_required
 def index():
