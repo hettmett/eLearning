@@ -1,5 +1,8 @@
+import hashlib
+from uuid import uuid4
+from datetime import datetime
 from sqlalchemy import Column, Integer, String
-from models.base import Base
+from src.models.base import Base, DB
 
 
 class Users(Base):
@@ -11,7 +14,7 @@ class Users(Base):
     last_name = Column(String(30))
     first_name = Column(String(30))
     middle_name = Column(String(30))
-    birth_date = Column(String(10))
+    birth_date = Column(String(15))
     role = Column(String(10))
     token = Column(String(64), unique=True)
     rate = Column(Integer)
@@ -43,3 +46,41 @@ class Users(Base):
             self.birth_date, self.role, self.token, self.rate,
             self.created, self.modified
         )
+
+    @staticmethod
+    def login(email: str, pwd: str):
+        password = hashlib.sha512(pwd.encode('utf-8')).hexdigest()
+        user = DB.query(Users).filter(Users.email == email, Users.password == password).first()
+        return user
+
+    @staticmethod
+    def new(fields: list):
+        try:
+            DB.add(Users(
+                first_name=fields[0],
+                last_name=fields[1],
+                email=fields[2],
+                role=fields[3],
+                token=str(uuid4()),
+                created=datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+            DB.commit()
+        except:
+            DB.rollback()
+
+    @staticmethod
+    def check_token(token):
+        return DB.query(Users).filter_by(token=token).first()
+
+    @staticmethod
+    def change_password(id: int, password: str):
+        try:
+            our_user = DB.query(Users).filter_by(id=id).first()
+            if our_user is not None:
+                our_user.password = hashlib.sha512(password.encode('utf-8')).hexdigest()
+                return our_user
+        except:
+            DB.rollback()
+
+    @staticmethod
+    def find_by_id(id: int):
+        return DB.query(Users).filter(Users.id == id).first()

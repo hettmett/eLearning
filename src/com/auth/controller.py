@@ -11,11 +11,16 @@ class AuthController(object):
         super().__init__()
 
     def login(self, email: str, pwd: str):
+        if len(pwd) == 0:
+            raise Exception('Password required')
+        if len(email) == 0:
+            raise Exception('Email required')
         if not self.is_valid_email(email):
             raise Exception('Email not valid')
         user = Users.login(email, pwd)
         if user is not None:
-            session['user_id'] = user.id
+            session['user'] = {'id': user.id, 'role': user.role, 'fnm': user.first_name, 'lnm': user.last_name}
+            print(f'session = {session["user"]}')
             return True
         return False
 
@@ -36,22 +41,20 @@ class AuthController(object):
             mail.send(msg)
         return "Sent"
 
-    def add(self, fields):
-        if len(fields[0]) == 0:
+    def add(self, first_name, last_name, email, role):
+        if len(first_name) == 0:
             raise Exception('First name required')
-        if len(fields[1]) == 0:
+        if len(last_name) == 0:
             raise Exception('Last name required')
-        if len(fields[2]) == 0:
+        if len(email) == 0:
             raise Exception('Email required')
-        if not self.is_valid_email(fields[2]):
+        if not self.is_valid_email(email):
             raise Exception('Email not valid')
-        user = Users.add(fields)
-        print(user.email)
+        user = Users.add(first_name, last_name, email, role)
         self.send_mail(user.email, user.token)
-        return
 
-    def check_token(self, token):
-        our_user = DB.query(Users).filter_by(token=token).first()
+    def check_token(self, token: str):
+        our_user = Users.check_token(token)
         if our_user is not None:
             return our_user.id
         return 0
@@ -67,4 +70,4 @@ class AuthController(object):
 
     @staticmethod
     def find_by_id(id: int):
-        return DB.query(Users.first_name, Users.last_name).filter(Users.id == id).first()
+        return Users.find_by_id(id)

@@ -5,10 +5,19 @@ from flask import session, flash, redirect, url_for
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if session.get('user_id'):
+        if session['user']['id']:
             return func(*args, **kwargs)
-        flash('Please login')
+        flash('Please Login !')
         return redirect(url_for('auth.login'))
-
     return wrapper
 
+
+def require_roles(*roles):
+    def wrapper(func):
+        @wraps(func)
+        def wrapped(*args, **kwargs):
+            if session['user']['role'] in roles:
+                return func(*args, **kwargs)
+            flash('You do not have permission to access this page !')
+        return wrapped
+    return wrapper

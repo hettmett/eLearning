@@ -95,11 +95,12 @@
                                         class="zmdi zmdi-check text-success"></i> available</a>
                                 <ul class="dropdown-menu open-left-side">
                                     <li>
-                                        <a href="#"><i
-                                                class="zmdi zmdi-check text-success"></i><span>available</span></a>
+                                        <a href="#">
+                                            <i class="zmdi zmdi-check text-success"></i><span>available</span></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="zmdi zmdi-circle-o text-warning"></i><span>busy</span></a>
+                                        <a href="#">
+                                            <i class="zmdi zmdi-circle-o text-warning"></i><span>busy</span></a>
                                     </li>
                                     <li>
                                         <a href="#"><i
@@ -187,7 +188,6 @@
 
     <div class="page-wrapper">
         <div class="container-fluid pt-25">
-
             <div class="row flash_message">
                 {% block exeption_flash %}
                     {% with messages = get_flashed_messages() %}
@@ -220,10 +220,8 @@
     </div>
 </div>
 
-
 <!-- JavaScript -->
 <!-- jQuery -->
-
 
 <script src="/static/vendors/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -274,7 +272,6 @@
 <!-- Init JavaScript -->
 <script src="/static/js/init.js"></script>
 <script src="/static/js/dashboard6-data.js"></script>
-
 
 </body>
 </html>

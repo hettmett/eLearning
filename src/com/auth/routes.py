@@ -1,26 +1,25 @@
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
-from com.auth import login_required
 from com.auth.controller import AuthController
+from com.auth import login_required
 
 
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
 
+@auth.route('')
 @auth.route('/')
 @login_required
 def index():
-    id = int(session.get('user_id'))
-    user = AuthController.find_by_id(id)
-    user_name = f'{user[0]} {user[1]}'
+    user_name = f"{session['user']['fnm']} {session['user']['fnm']}"
     return render_template('index.html', user_name=user_name)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+        email = request.form.get('email').strip()
+        password = request.form.get('password').strip()
         try:
             if AuthController().login(email, password):
                 flash(f"{email} logged in successfully")
@@ -35,7 +34,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    del session['user_id']
+    del session['user']
     return redirect(url_for('auth.login'))
 
 
@@ -46,9 +45,8 @@ def add():
         last_name = request.form.get('last_name').strip().strip('\n')
         email = request.form.get('email').strip().strip('\n')
         role = request.form.get('role').strip().strip('\n')
-        fields = [first_name, last_name, email, role]
         try:
-            AuthController().add(fields)
+            AuthController().add(first_name, last_name, email, role)
         except Exception as ex:
             flash(ex)
     return render_template("create_user.html")
