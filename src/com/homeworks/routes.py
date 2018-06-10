@@ -30,20 +30,19 @@ def add():
         file_path = form.get('file_path')
         deadline = form.get('deadline')
         created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        fields = [lesson_id, title, description, file_path, deadline, created]
         try:
-            HomeworksController().add(fields)
+            HomeworksController().add(lesson_id, title, description, file_path, deadline, created)
             return redirect(url_for('homeworks.all'))
         except Exception as ex:
             flash(ex)
     return render_template('new_homework.html', fields=fields)
 
 
-@homeworks.route('/edit/<hw_id>/', methods=['GET', 'POST'])
+@homeworks.route('/edit/<id>/', methods=['GET', 'POST'])
 @login_required
 @role_required('teacher', page='homeworks.all')
-def edit(hw_id):
-    homework = HomeworksController().find_by_id(hw_id)
+def edit(id):
+    homework = HomeworksController().find_by_id(id)
     if request.method == 'POST':
         form = request.form
         lesson_id = form.get('lesson_id')
@@ -52,9 +51,8 @@ def edit(hw_id):
         file_path = form.get('file_path')
         deadline = form.get('deadline')
         modified = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        fields = [lesson_id, title, description, file_path, deadline, modified]
         try:
-            HomeworksController().edit(fields, hw_id)
+            HomeworksController().edit(id, lesson_id, title, description, file_path, deadline, modified)
             return redirect(url_for('homeworks.all'))
         except Exception as ex:
             flash(ex)

@@ -9,7 +9,7 @@ class HomeworksController(object):
     def all(self):
         return Homeworks.all()
 
-    def new(self, fields: list):
+    def add(self, fields: list):
         self.form_is_valid(fields)
         return Homeworks.new(fields)
 
@@ -17,8 +17,8 @@ class HomeworksController(object):
         self.form_is_valid(fields)
         return Homeworks.edit(fields, id)
 
-    def delete(self, id: int):
-        return Homeworks.delete(id)
+    def remove(self, id: int):
+        return Homeworks.remove(id)
 
     def find_by_id(self, id):
         return Homeworks.find_by_id(id)

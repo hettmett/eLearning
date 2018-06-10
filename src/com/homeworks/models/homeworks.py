@@ -17,34 +17,34 @@ class Homeworks(Base):
     @staticmethod
     def all():
         try:
-            return DB.query(Homeworks).order_by(Homeworks.id.desc()).limit(10).all()
+            return DB.query(Homeworks).all()
         except:
             DB.rollback()
 
     @staticmethod
-    def add(fields: list):
+    def add(lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
         try:
             DB.add(Homeworks(
-                lesson_id=fields[0],
-                title=fields[1],
-                description=fields[2],
-                file_path=fields[3],
-                deadline=fields[4],
-                created=fields[5]))
+                lesson_id=lesson_id,
+                title=title,
+                description=description,
+                file_path=file_path,
+                deadline=deadline,
+                created=created))
             DB.commit()
         except:
             DB.rollback()
 
     @staticmethod
-    def edit(fields: list, id: int):
+    def edit(id: int, lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
         try:
             DB.query(Homeworks).filter(Homeworks.id == id).update(dict(
-                lesson_id=fields[0],
-                title=fields[1],
-                description=fields[2],
-                file_path=fields[3],
-                deadline=fields[4],
-                modified=fields[5]))
+                lesson_id=lesson_id,
+                title=title,
+                description=description,
+                file_path=file_path,
+                deadline=deadline,
+                created=created))
             DB.commit()
         except:
             DB.rollback()
