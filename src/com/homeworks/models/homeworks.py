@@ -24,13 +24,14 @@ class Homeworks(Base):
     @staticmethod
     def add(lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
         try:
-            DB.add(Homeworks(
+            homework = Homeworks(
                 lesson_id=lesson_id,
                 title=title,
                 description=description,
                 file_path=file_path,
                 deadline=deadline,
-                created=created))
+                created=created)
+            DB.add(homework)
             DB.commit()
         except:
             DB.rollback()
