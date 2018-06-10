@@ -195,14 +195,13 @@
                     {% if messages %}
                         <ul>
                             {% for message in messages %}
-                                <li class="alert alert-warning">{{ message }}</li>
+                                <li class="alert alert-warning"> <h3 style="color: black;"> {{ message }} </h3> </li>
                             {% endfor %}
                         </ul>
                     {% endif %}
                 {% endwith %}
             {% endblock %}
         </div>
-
         {% block content %}
 
             {# include block #}

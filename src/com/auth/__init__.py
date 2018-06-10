@@ -12,7 +12,7 @@ def login_required(func):
     return wrapper
 
 
-def require_roles(*roles, page):
+def role_required(*roles, page):
     def wrapper(func):
         @wraps(func)
         def wrapped(*args, **kwargs):

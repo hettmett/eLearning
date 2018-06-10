@@ -2,7 +2,7 @@ from flask import Blueprint
 from datetime import datetime
 from flask import render_template, request, url_for, flash, redirect
 from com.homeworks.controller import HomeworksController
-from com.auth import login_required, require_roles
+from com.auth import login_required, role_required
 
 
 homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
@@ -11,6 +11,7 @@ homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
 
 @homeworks.route('/')
 @login_required
+# @role_required('teacher', page='auth.index')
 def all():
     all = HomeworksController().all()
     return render_template('all_homeworks.html', homeworks=all)
@@ -18,7 +19,7 @@ def all():
 
 @homeworks.route('/new', methods=['GET', 'POST'])
 @login_required
-@require_roles('teacher', page='homeworks.all')
+@role_required('teacher', page='homeworks.all')
 def add():
     fields = []
     if request.method == 'POST':
@@ -40,7 +41,7 @@ def add():
 
 @homeworks.route('/edit/<hw_id>/', methods=['GET', 'POST'])
 @login_required
-@require_roles('teacher', page='homeworks.all')
+@role_required('teacher', page='homeworks.all')
 def edit(hw_id):
     homework = HomeworksController().find_by_id(hw_id)
     if request.method == 'POST':
@@ -62,7 +63,7 @@ def edit(hw_id):
 
 @homeworks.route('/delete/<id>')
 @login_required
-@require_roles('teacher', page='homeworks.all')
+@role_required('teacher', page='homeworks.all')
 def remove(id):
     HomeworksController().remove(id)
     return redirect(url_for('homeworks.all'))
