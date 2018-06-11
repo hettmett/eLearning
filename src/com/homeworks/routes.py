@@ -11,7 +11,7 @@ homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
 
 @homeworks.route('/')
 @login_required
-@role_required('teacher', page='auth.index')
+@role_required('teacher')
 def all():
     homeworks = HomeworksController().all()
     return render_template('all_homeworks.html', homeworks=homeworks)
@@ -19,7 +19,7 @@ def all():
 
 @homeworks.route('/new', methods=['GET', 'POST'])
 @login_required
-@role_required('teacher', page='homeworks.all')
+@role_required('teacher')
 def add():
     fields = []
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def add():
 
 @homeworks.route('/edit/<id>/', methods=['GET', 'POST'])
 @login_required
-@role_required('teacher', page='homeworks.all')
+@role_required('teacher')
 def edit(id):
     homework = HomeworksController().find_by_id(id)
     if request.method == 'POST':
@@ -61,7 +61,7 @@ def edit(id):
 
 @homeworks.route('/delete/<id>')
 @login_required
-@role_required('teacher', page='homeworks.all')
+@role_required('teacher')
 def remove(id):
     HomeworksController().remove(id)
     return redirect(url_for('homeworks.all'))

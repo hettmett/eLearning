@@ -59,7 +59,7 @@ class AuthController(object):
             return our_user.id
         return 0
 
-    def change_password(self, id, password):
+    def change_password(self, id: int, password: str):
         return Users.change_password(id, password)
 
     def is_valid_email(self, email):
