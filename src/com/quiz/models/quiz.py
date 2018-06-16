@@ -124,48 +124,50 @@ class Quizes(Base):
     def add(teacher_id, group_id, title, lessons, start_time,
             duration, create_date, count):
         """Adding record to the table."""
-        #try:
-        quiz = Quizes(teacher_id=teacher_id,
-                         group_id=group_id,
-                         title=title,
-                         lessons=lessons,
-                         start_time=start_time,
-                         duration=duration,
-                         create_date=create_date,
-                         count=count)
-        DB.add(quiz)
-        DB.commit()
-        return quiz.id
-        # except Exception:
-        #     DB.rollback()
-
-
+        try:
+            quiz = Quizes(teacher_id=teacher_id,
+                          group_id=group_id,
+                          title=title,
+                          lessons=lessons,
+                          start_time=start_time,
+                          duration=duration,
+                          create_date=create_date,
+                          count=count)
+            DB.add(quiz)
+            DB.commit()
+            return quiz.id
+        except Exception:
+            DB.rollback()
 
     @staticmethod
     def edit(quiz_id, teacher_id, group_id, title, lessons, start_time,
-             duration, modified_date):
+             duration, modified_date, count):
         """Adding record to the table."""
-        # try:
-        DB.query(Quizes).filter(Quizes.id == quiz_id).update(
-                                     dict(teacher_id=teacher_id,
-                                     group_id=group_id,
-                                     title=title,
-                                     lessons=lessons,
-                                     start_time=start_time,
-                                     duration=duration,
-                                     modified_date=modified_date)
-             )
-        DB.commit()
-        # except Exception:
-        #     DB.rollback()
+        try:
+            DB.query(Quizes).filter(Quizes.id == quiz_id).update(
+                dict(teacher_id=teacher_id,
+                     group_id=group_id,
+                     title=title,
+                     lessons=lessons,
+                     start_time=start_time,
+                     duration=duration,
+                     modified_date=modified_date,
+                     count=count)
+            )
+            DB.commit()
+        except Exception:
+            DB.rollback()
 
     @staticmethod
     def remove(id: int):
         """Removing record from the table."""
-        try:
-            DB.remove(Quizes.find_by_id(id))
-        except Exception:
-            DB.rollback()
+        # try:
+        DB.query(Quizes).filter(
+            Quizes.id == id
+            ).delete()
+        DB.commit()
+        # except Exception:
+        #     DB.rollback()
 
     @staticmethod
     def find_by_id(id: int):
@@ -225,15 +227,18 @@ class Student_quizes(Base):
         #     DB.rollback()
 
     @staticmethod
-    def remove_all_by_quiz_id(quiz_id: int):
+    def remove_by_quiz_id(quiz_id: int):
         """Removing record from the table."""
-        try:
-            DB.remove(Student_quizes.all_by_quiz_id(quiz_id))
-        except Exception:
-            DB.rollback()
+        # try:
+        DB.query(Student_quizes).filter(
+            Student_quizes.quiz_id == quiz_id
+            ).delete()
+        DB.commit()
+        # except Exception:
+        #     DB.rollback()
 
     @staticmethod
-    def all_by_quiz_id(quiz_id: int):
+    def get_by_quiz_id(quiz_id: int):
         """Finding record in the table by id."""
         try:
             return DB.query(Student_quizes).\

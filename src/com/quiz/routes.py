@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
 from com.auth import login_required, role_required
@@ -44,39 +45,36 @@ def add():
     return render_template('new_quiz.html')
 
 
-@quizes.route('/edit/<hw_id>/', methods=['GET', 'POST'])
+@quizes.route('/edit/<id>/', methods=['GET', 'POST'])
 @login_required
-#@role_required('teacher')
-def edit(hw_id):
-    quiz = QuizController().find_by_id(hw_id)
+# @role_required('teacher')
+def edit(id):
+    quiz = QuizController().find_by_id(id)
+    lesson_ids = ','.join(map(str, json.loads(quiz.lessons)))
     if request.method == 'POST':
         form = request.form
         title = form.get('title')
         group_id = form.get('group_id')
         lesson_ids = form.get('lessons')
-        #count = form.get('count')
+        count = form.get('count')
         start_time = form.get('start_time')
         duration = form.get('duration')
         modified_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         teacher_id = session['user']['id']
-        #lessons = list(map(int, lesson_ids.split(',')))
+        lessons = list(map(int, lesson_ids.split(',')))
         try:
-            QuizController().edit(int(hw_id), int(teacher_id), int(group_id), title,
-                                  lesson_ids, start_time,
-                                  modified_date, duration)
-            # QuizController().generate_quiz(hw_id, teacher_id, int(group_id), title,
-            #                                    lessons, start_time, create_date,
-            #                                    modified_date, duration, int(count))
+            QuizController().edit(int(id), int(teacher_id), int(group_id),
+                                  title, lessons, start_time,
+                                  modified_date, duration, int(count))
             return redirect(url_for('quizes.all'))
         except Exception as ex:
             flash(ex)
-    return render_template('edit_quiz.html', quiz=quiz)
+    return render_template('edit_quiz.html', quiz=quiz, lesson_ids=lesson_ids)
 
 
-'''
 @quizes.route('/delete/<id>')
 @login_required
+# @role_required('teacher')
 def remove(id):
     QuizController().remove(id)
     return redirect(url_for('quizes.all'))
-'''

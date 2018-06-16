@@ -23,6 +23,7 @@
                                     <th> Title</th>
                                     <th> Group</th>
                                     <th> Lessons</th>
+                                    <th> Number of questions</th>
                                     <th> Start date</th>
                                     <th> Duration</th>
                                     <th></th>
@@ -37,6 +38,7 @@
                                           <td> {{ quiz.title }} </td>
                                           <td> {{ quiz.group_id }} </td>
                                           <td> {{ quiz.lessons }} </td>
+                                          <td> {{ quiz.count }} </td>
                                           <td> {{ quiz.start_time }} </td>
                                           <td> {{ quiz.duration }} </td>
                                           <td><a href="edit/{{ quiz.id }}" class="btn btn-success" role="button">
