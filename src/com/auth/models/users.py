@@ -14,16 +14,14 @@ class Users(Base):
     last_name = Column(String(30))
     first_name = Column(String(30))
     middle_name = Column(String(30))
-    birth_date = Column(String(15))
+    birth_date = Column(String(30))
     role = Column(String(10))
     token = Column(String(64), unique=True)
-    rate = Column(Integer)
-    created = Column(String(30))
-    modified = Column(String(30))
+    create_date = Column(String(30))
 
     def __init__(self, name=None, email=None, password=None, last_name=None,
                  first_name=None, middle_name=None, birth_date=None, role=None,
-                 token=None, rate=None, created=None, modified=None):
+                 token=None, create_date=None):
         super().__init__()
         self.name = name
         self.email = email
@@ -34,17 +32,15 @@ class Users(Base):
         self.birth_date = birth_date
         self.role = role
         self.token = token
-        self.rate = rate
-        self.created = created
-        self.modified = modified
+        self.create_date = create_date
 
     def __repr__(self):
         return "<User(email = {}, first_name = {}, middle_name = {} ," \
                "last_name = {}, birth_date = {}, role = {}," \
-               "token = {}, rate = {}, created = {}, modified = {} )>".format(
+               "token = {}, create_date = {})>".format(
             self.email, self.first_name, self.middle_name, self.last_name,
-            self.birth_date, self.role, self.token, self.rate,
-            self.created, self.modified
+            self.birth_date, self.role, self.token,
+            self.create_date
         )
 
     @staticmethod
@@ -54,15 +50,15 @@ class Users(Base):
         return user
 
     @staticmethod
-    def add(first_name, last_name, email, role: list):
+    def new(fields: list):
         try:
             user = Users(
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                role=role,
+                first_name=fields[0],
+                last_name=fields[1],
+                email=fields[2],
+                role=fields[3],
                 token=str(uuid4()),
-                created=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                create_date=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             DB.add(user)
             DB.commit()
             return user
@@ -70,19 +66,54 @@ class Users(Base):
             DB.rollback()
 
     @staticmethod
-    def check_token(token):
-        return DB.query(Users).filter_by(token=token).first()
-
-    @staticmethod
     def change_password(id: int, password: str):
         try:
             our_user = DB.query(Users).filter_by(id=id).first()
             if our_user is not None:
+                print(id,password)
+                print(our_user.first_name)
                 our_user.password = hashlib.sha512(password.encode('utf-8')).hexdigest()
+                DB.commit()
                 return our_user
         except:
             DB.rollback()
 
     @staticmethod
+    def check_token(token: str):
+        return DB.query(Users).filter_by(token=token).first()
+
+    @staticmethod
+    def get_all():
+        try:
+            return DB.query(Users).all()
+        except:
+            DB.rollback()
+
+    @staticmethod
+    def edit(fields: list, id: int):
+        try:
+            DB.query( Users ).filter( Users.id == id ).update( dict(
+                email=fields[0],
+                first_name=fields[1],
+                last_name=fields[2],
+                middle_name=fields[3],
+                birth_date=fields[4],
+                role=fields[5]))
+            DB.commit()
+        except:
+            DB.rollback()
+
+    @staticmethod
+    def delete(id: int):
+        try:
+            DB.delete(Users.find_by_id(id))
+            DB.commit()
+        except:
+            DB.rollback()
+
+    @staticmethod
     def find_by_id(id: int):
-        return DB.query(Users).filter(Users.id == id).first()
+        try:
+            return DB.query(Users).filter(Users.id == id ).first()
+        except:
+            DB.rollback()

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Edit N{{ quiz.id }} quiz {% endblock %}
+
+{% block content %}
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h5 class="txt-dark">New quiz</h5>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <form method="POST">
+                                <table id="myTable_quiz" class="table table-hover display  pb-30">
+                                    <tr>
+                                        <th><label for="title">Title</label></th>
+                                        <th><label for="group_id">Group</label></th>
+                                        <th><label for="lessons">Lessons</label></th>
+                                        <th><label for="count">Number of questions</label></th>
+                                        <th><label for="start_time">Start date</label></th>
+                                        <th><label for="duration">Duration</label></th>
+                                        <th><a href="/quizes" class="btn btn-danger"> Back </a></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" name="title"
+                                                   value="{{ quiz.title }}" required autofocus>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="group_id"
+                                                   value="{{ quiz.group_id }}" required autofocus>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="lessons"
+                                                   value="{{ quiz.lessons }}" required autofocus>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="count"
+                                                   value="{{ quiz.count }}" required autofocus>
+
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="start_time"
+                                                   value="{{ quiz.start_time }}" required autofocus>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="duration"
+                                                   value="{{ quiz.duration }}" required autofocus>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success">Update</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+{% endblock %}

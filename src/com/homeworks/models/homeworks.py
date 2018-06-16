@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from models.base import Base, DB
 
 
@@ -15,9 +16,9 @@ class Homeworks(Base):
     modified = Column(String(30), nullable=True)
 
     @staticmethod
-    def all():
+    def all(lesson_id: int):
         try:
-            return DB.query(Homeworks).all()
+            return DB.query(Homeworks).filter_by(lesson_id=lesson_id).all()
         except:
             DB.rollback()
 

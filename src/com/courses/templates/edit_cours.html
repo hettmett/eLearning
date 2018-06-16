@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} Edit homework {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><label for="title">Title</label></th>
+                    <th scope="col"><label for="description">Description</label></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td><input type="text" class="form-control" name="course_name" value="{{ fields.course_name }}"></td>
+                    <td><input type="text" class="form-control" name="description" value="{{ fields.description }}">
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

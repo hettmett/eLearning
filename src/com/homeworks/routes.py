@@ -9,11 +9,11 @@ homeworks = Blueprint('homeworks', __name__, url_prefix='/homeworks',
                       template_folder='templates', static_folder='static')
 
 
-@homeworks.route('/')
+@homeworks.route('/<lesson_id>')
 @login_required
 @role_required('teacher')
-def all():
-    homeworks = HomeworksController().all()
+def all(lesson_id: int):
+    homeworks = HomeworksController().all(lesson_id)
     return render_template('all_homeworks.html', homeworks=homeworks)
 
 

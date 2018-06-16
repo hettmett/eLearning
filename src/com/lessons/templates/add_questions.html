@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %} All lessons {% endblock %}
+
+{% block content %}
+<!-- Row -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default card-view">
+            <div class="panel-wrapper collapse in">
+                <div class="panel-body">
+                    <div class="form-wrap">
+                        <form method="post"  >
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Add question</label>
+                                <textarea class="form-control" rows="10" name="question"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Add options</label><br/>
+                                <label class="control-label mb-10 text-left">1</label>
+                                <input type="text" class="form-control" name="answer1" required autofocus>
+                                <label class="control-label mb-10 text-left">2</label>
+                                <input type="text" class="form-control" name="answer2" required autofocus>
+                                <label class="control-label mb-10 text-left">3</label>
+                                <input type="text" class="form-control" name="answer3" required autofocus>
+                                <label class="control-label mb-10 text-left">4</label>
+                                <input type="text" class="form-control" name="answer4" required autofocus>
+                            </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Select right answer</label>
+										<select class="selectpicker" data-style="form-control btn-default btn-outline" name="right_ans">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <input type=submit value=Save class="btn btn-success">
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

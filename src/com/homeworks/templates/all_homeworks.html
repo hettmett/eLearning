@@ -32,22 +32,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for homework in homeworks %}
-                                    <tr>
-                                        <td><a href="{{ homework.id }}"> {{ homework.id }} </a></td>
-                                        <td> {{ homework.lesson_id }} </td>
-                                        <td> {{ homework.title }} </td>
-                                        <td> {{ homework.description }} </td>
-                                        <td> {{ homework.file_path }} </td>
-                                        <td> {{ homework.deadline }} </td>
-                                        <td> {{ homework.created }} </td>
-                                        <td> {{ homework.modified }} </td>
-                                        <td><a href="edit/{{ homework.id }}" class="btn btn-success" role="button">
-                                            Edit </a></td>
-                                        <td><a href="delete/{{ homework.id }}" class="btn btn-danger" role="button">
-                                            Delete </a></td>
-                                    </tr>
-                                {% endfor %}
+                                {% if homeworks != None %}
+                                    {% for homework in homeworks %}
+                                        <tr>
+                                            <td><a href="{{ homework.id }}"> {{ homework.id }} </a></td>
+                                            <td> {{ homework.lesson_id }} </td>
+                                            <td> {{ homework.title }} </td>
+                                            <td> {{ homework.description }} </td>
+                                            <td> {{ homework.file_path }} </td>
+                                            <td> {{ homework.deadline }} </td>
+                                            <td> {{ homework.created }} </td>
+                                            <td> {{ homework.modified }} </td>
+                                            <td><a href="edit/{{ homework.id }}" class="btn btn-success" role="button">
+                                                Edit </a></td>
+                                            <td><a href="delete/{{ homework.id }}" class="btn btn-danger" role="button">
+                                                Delete </a></td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
                                 </tbody>
                             </table>
                         </div>

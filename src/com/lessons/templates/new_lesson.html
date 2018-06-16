@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} New lessons {% endblock %}
+
+{% block content %}
+<!-- Row -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default card-view">
+            <div class="panel-wrapper collapse in">
+                <div class="panel-body">
+                    <div class="form-wrap">
+                        <form method="post" enctype=multipart/form-data >
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Enter lesson title</label>
+                                <input type="text" class="form-control" name="title" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Add lesson description</label>
+                                <textarea class="form-control" rows="10" name="description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Add files</label>
+                                <input type="file" class="form-control" name="file" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mb-10 text-left">Select lesson date</label>
+                                <input type="date" class="form-control" name="lesson_date" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input type=submit value=Save class="btn btn-success">
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

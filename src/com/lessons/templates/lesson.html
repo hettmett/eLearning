@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} New lessons {% endblock %}
+
+{% block content %}
+<!-- Row -->
+<div class="row">
+						<div class="col-sm-12">
+						    <div class="panel panel-default card-view">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h6 class="panel-title txt-dark">{{lesson.title}}</h6>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body">
+										<p class="text-muted">{{lesson.description}}</p>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<div class="icon-container col-sm-6 col-md-4 col-lg-3">
+    <div class="preview"> <a href="files/{{filename}}" role="button"><i class="icon-cloud-download"></i></a>{{filename}}
+    </div>
+</div>
+
+{% endblock %}

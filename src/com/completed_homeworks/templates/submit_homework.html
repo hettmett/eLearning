@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Submit {{ homework_id }} homework {% endblock %}
+
+{% block content %}
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h3 class="txt-dark">Submit homework</h3>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="form-wrap">
+                            <form method="post" enctype=multipart/form-data>
+
+                                <div class="form-group">
+                                    <label class="control-label mb-10 text-left">Attach file</label>
+                                    <input type="file" class="form-control" name="file" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label mb-10 text-left">Homework description</label>
+                                    <textarea class="form-control" rows="10" name="description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type=submit value=Save class="btn btn-success">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Homework N{{ homework.id }} {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <form method="POST">
+                                <table class="table table-striped table-bordered">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Lesson_Id</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>File path</th>
+                                        <th>Deadline</th>
+                                        <th>Created</th>
+                                        <th>Modified</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ homework.id }}</td>
+                                        <td>{{ homework.lesson_id }}</td>
+                                        <td>{{ homework.title }}</td>
+                                        <td>{{ homework.description }}</td>
+                                        <td>{{ homework.file_path }}</td>
+                                        <td>{{ homework.deadline }}</td>
+                                        <td>{{ homework.created }}</td>
+                                        <td>{{ homework.modified }}</td>
+                                        <td><a href="/homeworks" class="btn btn-danger"> Back </a></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

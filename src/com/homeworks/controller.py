@@ -6,8 +6,8 @@ class HomeworksController(object):
     def __init__(self):
         super().__init__()
 
-    def all(self):
-        return Homeworks.all()
+    def all(self, lesson_id: int):
+        return Homeworks.all(lesson_id)
 
     def add(self, lesson_id: int, title: str, description: str, file_path: str, deadline: str, created: str):
         self.form_is_valid(lesson_id, title, description, file_path, deadline)

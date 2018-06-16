@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Create Student in group {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><label for="course_id">Groups</label></th>
+                    <th scope="col"><label for="status">Status</label></th>
+                    <th scope="col"><label for="teacher_id">Students</label></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td><select class="form-control" name="role">
+                           {% for groups in groups %}
+                              <option value="{{ groups.id }}">{{ groups.group_name }}</option>
+                           {% endfor %}
+                           </select>
+                   </td>
+                    <td><input type="text" class="form-control" name="status" value=""></td>
+                    <td><select class="form-control" name="student_id">
+                            {% for students in students %}
+                                <option value="{{ students.id }}">{{ students.last_name }} {{ students.first_name }}</option>
+                            {% endfor %}
+                         </select></td>
+
+                    <td>
+                        <button class="btn btn-success">Create</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

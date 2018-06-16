@@ -38,15 +38,16 @@ def logout():
 
 
 @auth.route('/users/new', methods=["GET", "POST"])
-def add():
+def new():
     if request.method == "POST":
         first_name = request.form.get('first_name').strip().strip('\n')
         last_name = request.form.get('last_name').strip().strip('\n')
         email = request.form.get('email').strip().strip('\n')
         role = request.form.get('role').strip().strip('\n')
-        print(first_name, last_name, email, role)
+        fields = [first_name, last_name, email, role]
         try:
-            AuthController().add(first_name, last_name, email, role)
+            print(fields)
+            AuthController().new(fields)
         except Exception as ex:
             flash(ex)
     return render_template("create_user.html")
@@ -72,6 +73,7 @@ def reset_password(token=None, id=None):
             if len(rep_password) == 0:
                 raise Exception('Repeat password required')
             if password == rep_password:
+                print("ch_pas")
                 AuthController().change_password(id, password)
                 return redirect(url_for('auth.login'))
             else:
@@ -79,3 +81,40 @@ def reset_password(token=None, id=None):
         except Exception as ex:
             flash(ex)
     return render_template('reset_password.html')
+
+
+@auth.route('/users')
+@login_required
+def show_all():
+    all = AuthController().get_all()
+    return render_template('users_table.html', users=all)
+
+
+@auth.route('/edit/<id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    user = AuthController().find_by_id(id)
+    print(user)
+    if request.method == 'POST':
+        email = request.form.get( 'email' )
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        middle_name = request.form.get('middle_name')
+        birth_date = request.form.get('birth_date')
+        role = request.form.get('role')
+        modified = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        fields_list = [email, first_name, last_name, middle_name, birth_date, role, modified]
+        try:
+            AuthController().edit(fields_list, id)
+            return redirect(url_for('auth.show_all'))
+        except Exception as ex:
+            flash(ex)
+    groups = GroupsController().all()
+    return render_template('edit_user.html', user=user, groups=groups)
+
+
+@auth.route('/delete/<id>')
+@login_required
+def delete(id):
+    AuthController().delete(id)
+    return redirect(url_for('auth.show_all'))

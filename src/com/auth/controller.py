@@ -2,7 +2,7 @@ import re
 from flask_mail import Mail, Message
 from flask import session, current_app as app
 from com.auth.models.users import Users
-from config import sys_conf
+from conf import sys_conf
 
 
 class AuthController(object):
@@ -40,26 +40,31 @@ class AuthController(object):
             mail.send(msg)
         return "Sent"
 
-    def add(self, first_name, last_name, email, role):
-        if len(first_name) == 0:
+    def new(self, fields):
+        if len(fields[0]) == 0:
             raise Exception('First name required')
-        if len(last_name) == 0:
+        if len(fields[1]) == 0:
             raise Exception('Last name required')
-        if len(email) == 0:
+        if len(fields[2]) == 0:
             raise Exception('Email required')
-        if not self.is_valid_email(email):
+        if not self.is_valid_email(fields[2]):
             raise Exception('Email not valid')
-        print(first_name, last_name, email, role)
-        user = Users.add(first_name, last_name, email, role)
-        self.send_mail(user.email, user.token)
+        user = Users.new(fields)
 
-    def check_token(self, token: str):
+        print(fields[0])
+        print(fields[1])
+        print(fields[2])
+        print(fields[3])
+        self.send_mail(user.email, user.token)
+        return
+
+    def check_token(self, token):
         our_user = Users.check_token(token)
         if our_user is not None:
             return our_user.id
         return 0
 
-    def change_password(self, id: int, password: str):
+    def change_password(self, id, password):
         return Users.change_password(id, password)
 
     def is_valid_email(self, email):
@@ -71,3 +76,12 @@ class AuthController(object):
     @staticmethod
     def find_by_id(id: int):
         return Users.find_by_id(id)
+
+    def get_all(self):
+        return Users.get_all()
+
+    def edit(self, fields: list, id: int):
+        return Users.edit(fields, id)
+
+    def delete(self, id: int):
+        return Users.delete(id)

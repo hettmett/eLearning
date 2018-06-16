@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} New courses {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><label for="groups_name">Title</label></th>
+                    <th scope="col"><label for="course_id">Course</label></th>
+                    <th scope="col"><label for="start_date">start date</label></th>
+                    <th scope="col"><label for="end_date">end date</label></th>
+                    <th scope="col"><label for="teacher_id">teacher</label></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td><input type="text" class="form-control" name="groups_name" value=""></td>
+                    <td><select class="form-control" name="role">
+                           {% for courses in courses %}
+                              <option value="{{ courses.id }}">{{ courses.course_name }}</option>
+                           {% endfor %}
+                           </select>
+                   </td>
+                    <td><input type="text" class="form-control" name="start_date" value=""></td>
+                    <td><input type="text" class="form-control" name="end_date" value=""></td>
+                    <td><select class="form-control" name="teacher_id">
+                            {% for teacher in teacher %}
+                                <option value="{{ teacher.id }}">{{ teacher.last_name }} {{ teacher.first_name }}</option>
+                            {% endfor %}
+                         </select></td>
+
+                    <td>
+                        <button class="btn btn-success">Create</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

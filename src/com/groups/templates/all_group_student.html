@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %} Last 10 groups {% endblock %}
+
+{% block content %}
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h5 class="txt-dark">Courses DataTable</h5>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <table id="myTable1" class="table table-hover display  pb-30">
+                                <thead>
+                                <tr>
+                                    <th> ID </th>
+                                    <th> Title </th>
+                                    <th> Description </th>
+                                    <th> Created </th>
+                                    <th> </th>
+                                    <th> <a href="new" class="btn btn-primary" role="button">Create</a> </th>
+                                </tr>
+                                </thead>
+                                    <tbody>
+                                    {% if groups=="None" %}
+                                    {% for groups in groups %}
+                                        <tr>
+                                            <td><a href="{{ groups.id }}"> {{ groups.id }} </a></td>
+                                            <td> {{ groups.course_name }} </td>
+                                            <td> {{ groups.description }} </td>
+                                            <td> {{ groups.created }} </td>
+                                            <td>
+                                                <a href="edit/{{ groups.id }}" class="btn btn-success" role="button">
+                                                    Edit
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="delete/{{ groups.id }}" class="btn btn-danger" role="button">
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+{% endblock %}

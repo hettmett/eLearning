@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Edit homework {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><label for="first_name">First Name</label>
+                    <th scope="col"><label for="last_name">Last Name</label></th>
+                    <th scope="col"><label for="middle_name">Middle Name</label></th>
+                    <th scope="col"><label for="email">Email</label></th>
+                    <th scope="col"><label for="birth_date">Birth_date</label></th>
+                    <th scope="col"><label for="role">Role</label></th>
+                    <th scope="col"><label for="Group">Group</label></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td><input type="text" class="form-control" name="first_name" value="{{user.first_name}}"></td>
+                    <td><input type="text" class="form-control" name="last_name" value="{{user.last_name}}"></td>
+                    <td><input type="text" class="form-control" name="middle_name" value="{{user.middle_name}}">
+                    </td>
+                    <td><input type="text" class="form-control" name="email" value="{{user.email}}"></td>
+                    <td><input type="date" class="form-control" name="birth_date" value="{{user.birth_date}}"></td>
+                    <td>
+                        <select class="form-control" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control" name="role">
+                            {% for group in groups %}
+                                <option value="{{ group.id }}">{{group.group_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}
