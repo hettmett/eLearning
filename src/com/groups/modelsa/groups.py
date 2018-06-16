@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from src.models.base import Base, DB
+from models.base import Base, DB
 
 
 class Groups(Base):

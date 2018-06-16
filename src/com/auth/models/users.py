@@ -2,7 +2,7 @@ import hashlib
 from uuid import uuid4
 from datetime import datetime
 from sqlalchemy import Column, Integer, String
-from src.models.base import Base, DB
+from models.base import Base, DB
 
 
 class Users(Base):
