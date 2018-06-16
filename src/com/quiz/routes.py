@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
 from com.auth import login_required, role_required
-from .quiz_controller import QuizController
+from .controller import QuizController
 from datetime import datetime
 
 
@@ -29,15 +29,14 @@ def add():
         start_time = form.get('start_time')
         duration = form.get('duration')
         create_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        modified_date = ""
         teacher_id = session['user']['id']
         print(type(teacher_id))
         lessons = list(map(int, lesson_ids.split(',')))
 
         try:
             QuizController().generate_quiz(teacher_id, int(group_id), title,
-                                               lessons, start_time, create_date,
-                                               modified_date, duration, int(count))
+                                           lessons, start_time, create_date,
+                                           duration, int(count))
 
             return redirect(url_for('quizes.all'))
         except Exception as ex:

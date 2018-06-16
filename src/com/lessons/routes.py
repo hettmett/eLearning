@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect, request, url_for, flash,
 from com.lessons.controllers import LessonsController
 from os import path
 
-from com.quiz.quiz_controller import QuizController
+from com.quiz.controller import QuizController
 
 lessons = Blueprint("lessons", __name__, template_folder="templates", static_folder="static",
                     url_prefix="/lessons")

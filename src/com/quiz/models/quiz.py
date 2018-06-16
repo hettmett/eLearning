@@ -118,25 +118,26 @@ class Quizes(Base):
     duration = Column(Integer)
     create_date = Column(String)
     modified_date = Column(String)
+    count = Column(Integer)
 
     @staticmethod
     def add(teacher_id, group_id, title, lessons, start_time,
-            duration, create_date, modified_date):
+            duration, create_date, count):
         """Adding record to the table."""
-        try:
-            quiz = Quizes(teacher_id=teacher_id,
-                             group_id=group_id,
-                             title=title,
-                             lessons=lessons,
-                             start_time=start_time,
-                             duration=duration,
-                             create_date=create_date,
-                             modified_date=modified_date)
-            DB.add(quiz)
-            DB.commit()
-            return quiz.id
-        except Exception:
-            DB.rollback()
+        #try:
+        quiz = Quizes(teacher_id=teacher_id,
+                         group_id=group_id,
+                         title=title,
+                         lessons=lessons,
+                         start_time=start_time,
+                         duration=duration,
+                         create_date=create_date,
+                         count=count)
+        DB.add(quiz)
+        DB.commit()
+        return quiz.id
+        # except Exception:
+        #     DB.rollback()
 
 
 
@@ -215,13 +216,13 @@ class Student_quizes(Base):
     @staticmethod
     def add(student_id, quiz_id, questions):
         """Adding record to the table."""
-        try:
-            DB.add(Student_quizes(student_id=student_id,
-                                  quiz_id=quiz_id,
-                                  questions=questions))
-            DB.commit()
-        except Exception:
-            DB.rollback()
+        # try:
+        DB.add(Student_quizes(student_id=student_id,
+                              quiz_id=quiz_id,
+                              questions=questions))
+        DB.commit()
+        # except Exception:
+        #     DB.rollback()
 
     @staticmethod
     def remove_all_by_quiz_id(quiz_id: int):
@@ -257,6 +258,7 @@ class Quiz_submission(Base):
     student_quiz_id = Column(Integer)
     start_date = Column(String)
     submission_date = Column(String)
+    rate = Column(Integer)
 
     @staticmethod
     def add(student_quiz_id, start_date, submission_date):
