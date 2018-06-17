@@ -20,6 +20,14 @@ class Groups(Base):
 
 
     @staticmethod
+    def get_all():
+        """Finding tha record in the table by id."""
+        try:
+            return DB.query(Groups).all()
+        except Exception:
+            DB.rollback()
+
+    @staticmethod
     def all():
             #all = DB.query(Groups).all()
             result = DB.execute("select groups.group_name,users.first_name,courses.course_name from groups INNER JOIN "

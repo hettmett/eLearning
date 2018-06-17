@@ -56,3 +56,9 @@ class Lessons(Base):
     def find_by_id(id):
         return DB.query(Lessons).filter(Lessons.id == id).first()
 
+    @staticmethod
+    def get_all():
+        try:
+            DB.query(Lessons).all()
+        except Exception:
+            DB.rollback()

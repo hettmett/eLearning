@@ -3,6 +3,8 @@ from flask import Blueprint
 from flask import render_template, request, session, url_for, flash, redirect
 from com.auth import login_required, role_required
 from .controller import QuizController
+from com.lessons.controller import LessonsController
+from com.groups.controller import GroupsController
 from datetime import datetime
 
 
@@ -21,6 +23,7 @@ def all():
 @login_required
 #@role_required('teacher')
 def add():
+    groups = GroupsController().get_all()
     if request.method == 'POST':
         form = request.form
         title = form.get('title')
@@ -31,7 +34,7 @@ def add():
         duration = form.get('duration')
         create_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         teacher_id = session['user']['id']
-        print(type(teacher_id))
+        #lessons = LessonController().get_all()
         lessons = list(map(int, lesson_ids.split(',')))
 
         try:
@@ -42,13 +45,14 @@ def add():
             return redirect(url_for('quizes.all'))
         except Exception as ex:
             flash(ex)
-    return render_template('new_quiz.html')
+    return render_template('new_quiz.html', groups=groups)
 
 
 @quizes.route('/edit/<id>/', methods=['GET', 'POST'])
 @login_required
 # @role_required('teacher')
 def edit(id):
+    groups = GroupsController().get_all()
     quiz = QuizController().find_by_id(id)
     lesson_ids = ','.join(map(str, json.loads(quiz.lessons)))
     if request.method == 'POST':

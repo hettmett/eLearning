@@ -29,8 +29,12 @@
                                     <tr>
                                     <td><input type="text" class="form-control" name="title"
                                                  value="{{ title }}" required autofocus></td>
-                                    <td><input type="text" class="form-control" name="group_id"
-                                               value="{{ group_id }}" required autofocus></td>
+                                    <td><select class="form-control" name="group_id">
+                                        {%for group in groups%}
+                                        <option value="{{group.id}}">{{group.group_name}}</option>
+                                        {%endfor%}
+                                        </select>
+                                    </td>
                                     <td><input type="text" class="form-control" name="lesson_ids"
                                                value="{{ lesson_ids }}" required autofocus></td>
                                     <td><input type="text" class="form-control" name="count"

@@ -29,3 +29,6 @@ class LessonsController(object):
 
     def find_by_id(self, id):
         return Lessons.find_by_id(id)
+
+    def get_all(self):
+        return Lessons().get_all()
