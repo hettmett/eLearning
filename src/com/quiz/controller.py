@@ -45,8 +45,11 @@ class QuizController(object):
         # Selecting questions and writing quizes to Student quizes table
         self.quiz_instance(lessons, count, quiz_id, group_id)
 
-    def get_all(self, teacher_id):
+    def get_all_by_teacher_id(self, teacher_id):
         return Quizes().all_by_teacher_id(teacher_id)
+
+    def get_all_by_student_id(self, student_id):
+        return Quizes().all_by_student_id(student_id)
 
     def find_by_id(self, id):
         return Quizes.find_by_id(id)

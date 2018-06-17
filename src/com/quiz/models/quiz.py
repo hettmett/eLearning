@@ -186,6 +186,15 @@ class Quizes(Base):
         except Exception:
             DB.rollback()
 
+    @staticmethod
+    def all_by_student_id(student_id: int):
+        """Finding record in the table by id."""
+        try:
+            return DB.query(Quizes).filter(
+                Quizes.student_id == student_id).all()
+        except Exception:
+            DB.rollback()
+
     def __repr__(self):
         """Representation of single row."""
         return "teacher_id = {}\n" \

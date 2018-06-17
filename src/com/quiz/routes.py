@@ -14,9 +14,18 @@ quizes = Blueprint('quizes', __name__, url_prefix='/quizes',
 
 @quizes.route('/')
 @login_required
+@role_required('teacher', 'student')
 def all():
-    all_quizes = QuizController().get_all(session['user']['id'])
-    return render_template('all_quizes.html', quizes=all_quizes)
+    role = session['user']['role']
+    if role == 'teacher':
+        all_quizes = QuizController().get_all_by_teacher_id(
+                                        session['user']['id']
+                                        )
+    elif role == 'student':
+        all_quizes = QuizController().get_all_by_student_id(
+                                        session['user']['id']
+                                        )
+    return render_template('all_quizes.html', role=role, quizes=all_quizes)
 
 
 @quizes.route('/new', methods=['GET', 'POST'])
@@ -54,7 +63,9 @@ def add():
 def edit(id):
     groups = GroupsController().get_all()
     quiz = QuizController().find_by_id(id)
+    group = GroupsController().find_by_id(quiz.group_id)
     lesson_ids = ','.join(map(str, json.loads(quiz.lessons)))
+
     if request.method == 'POST':
         form = request.form
         title = form.get('title')
@@ -73,7 +84,8 @@ def edit(id):
             return redirect(url_for('quizes.all'))
         except Exception as ex:
             flash(ex)
-    return render_template('edit_quiz.html', quiz=quiz, lesson_ids=lesson_ids)
+    return render_template('edit_quiz.html', groups=groups, group=group,
+                           quiz=quiz, lesson_ids=lesson_ids)
 
 
 @quizes.route('/delete/<id>')

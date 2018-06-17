@@ -21,11 +21,11 @@ class Groups(Base):
 
     @staticmethod
     def get_all():
-        """Finding tha record in the table by id."""
         try:
             return DB.query(Groups).all()
         except Exception:
             DB.rollback()
+
 
     @staticmethod
     def all():
@@ -52,10 +52,10 @@ class Groups(Base):
             end_date=fields[3],
             create_date = fields[4],
             teacher_id = fields[5]))
-        """
-        DB.execute("INSERT INTO groups (group_name,course_id, start_date, end_date, create_date, teacher_id)"
-                   "VALUES ("+fields[0]+","+fields[1]+","+fields[2]+","+fields[3]+","+fields[4]+","+fields[5]+")")
-        """
+        #
+        # DB.execute("INSERT INTO groups (group_name,course_id, start_date, end_date, create_date, teacher_id)"
+        #            "VALUES ("+fields[0]+","+fields[1]+","+fields[2]+","+fields[3]+","+fields[4]+","+fields[5]+")")
+
         DB.commit()
        # except:
        #     DB.rollback()

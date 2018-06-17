@@ -33,6 +33,7 @@
                                         </td>
                                         <td>
                                           <select class="form-control" name="group_id">
+                                          <option selected disabled hidden>{{group.group_name}}</option>
                                               {%for group in groups%}
                                               <option value="{{group.id}}">{{group.group_name}}</option>
                                               {%endfor%}
