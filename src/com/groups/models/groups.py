@@ -100,7 +100,6 @@ class Groups(Base):
         except:
             DB.rollback()
 
-<<<<<<< HEAD
     # **********************************************************************************************
     @staticmethod
     def get_course_name(teacher_id: int):
@@ -114,8 +113,3 @@ class Groups(Base):
     @staticmethod
     def get_all_groups_by_teacher(teacher_id: int):
         return DB.query(Groups.group_name).filter_by(teacher_id=teacher_id).all()
-=======
-#sql_cmd = DB.text("select groups.group_name,users.first_name,courses.course_name from groups INNER JOIN "
- #                               "users ON groups.teacher_id = users.id JOIN courses ON groups.course_id = courses.id")
-  #          results = db.execute(sql_cmd).fetchall()
->>>>>>> 1e12da570cc86315673107873b6026d2e7c7635b
