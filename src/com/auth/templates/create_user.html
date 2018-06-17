@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% block title %} Create new user {% endblock %}
 
+{#{% block top_menu %} {% endblock %}#}
+{#{% block left %} {% endblock %}#}
+
 {% block content %}
     <div class="row">
         <form method="POST">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <h2>Create user</h2>
                     <hr>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <div class="form-group has-danger">
                         <div class="input-group mb-4 mr-sm-4 mb-sm-4">
                             <input type="text" name="first_name" class="form-control"
@@ -23,8 +26,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <div class="form-group has-danger">
                         <div class="input-group mb-4 mr-sm-4 mb-sm-4">
                             <input type="text" name="last_name" class="form-control"
@@ -34,8 +37,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <div class="form-group has-danger">
                         <div class="input-group mb-4 mr-sm-4 mb-sm-4">
                             <input type="text" name="email" class="form-control"
@@ -46,10 +49,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <label class="control-label">Select role: </label>
-                    <select name="role">
+                    <select name="role" class="select2-selection">
                         <option value="admin">Admin</option>
                         <option value="teacher">Teacher</option>
                         <option value="student" selected>Student</option>
@@ -57,8 +60,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-5"></div>
+                <div class="col-md-5">
                     <button type="submit" class="btn btn-success"><i class="fa fa-registered"></i> Register</button>
                 </div>
             </div>

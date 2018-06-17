@@ -1,8 +1,9 @@
 from flask import Blueprint
+from datetime import datetime
 from flask import render_template, request, session, url_for, flash, redirect
+from com.groups.controller import GroupsController
 from com.auth.controller import AuthController
 from com.auth import login_required
-
 
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
@@ -10,8 +11,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='template
 @auth.route('/')
 @login_required
 def index():
-    user_name = f"{session['user']['fnm']} {session['user']['lnm']}"
-    return render_template('index.html', user_name=user_name)
+    return render_template('index.html')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -37,8 +37,8 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@auth.route('/users/new', methods=["GET", "POST"])
-def new():
+@auth.route('/users/add', methods=["GET", "POST"])
+def add():
     if request.method == "POST":
         first_name = request.form.get('first_name').strip().strip('\n')
         last_name = request.form.get('last_name').strip().strip('\n')

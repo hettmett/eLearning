@@ -1,12 +1,13 @@
+from os import path
 from com.auth.routes import login_required
 from flask import Blueprint, render_template, redirect, request, url_for, flash, send_from_directory
-from com.lessons.controllers import LessonsController
-from os import path
+from com.lessons.controller import LessonsController
+from com.quiz.quiz_controller import QuizController
 
-from src.com.quiz.quiz_controller import QuizController
 
 lessons = Blueprint("lessons", __name__, template_folder="templates", static_folder="static",
                     url_prefix="/lessons")
+
 
 @lessons.route('/<group_id>/<id>/add_question', methods=['GET', 'POST'])
 @login_required
@@ -22,7 +23,7 @@ def add_question(group_id,id):
         answers.extend([answer1, answer2, answer3, answer4])
         right_ans = form.get("right_ans")
         QuizController().add_question(id, question, answers, right_ans)
-        return redirect( url_for( "lessons.edit", group_id=group_id, id=id ) )
+        return redirect(url_for( "lessons.edit", group_id=group_id, id=id ) )
     return render_template("add_questions.html", id=id)
 
 

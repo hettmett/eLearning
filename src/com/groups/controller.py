@@ -42,3 +42,12 @@ class GroupsController(object):
             raise Exception('title required')
         if len(fields[1].strip()) == 0:
             raise Exception('description required')
+
+    # ******************************************************
+    @staticmethod
+    def get_all_groups_by_teacher(teacher_id: int):
+        return Groups.get_all_groups_by_teacher(teacher_id)
+
+    @staticmethod
+    def get_course_name(teacher_id: int):
+        return Groups.get_course_name(teacher_id)

@@ -13,7 +13,6 @@
                     <th scope="col"><label for="email">Email</label></th>
                     <th scope="col"><label for="birth_date">Birth_date</label></th>
                     <th scope="col"><label for="role">Role</label></th>
-                    <th scope="col"><label for="Group">Group</label></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -29,13 +28,6 @@
                             <option value="admin">Admin</option>
                             <option value="teacher">Teacher</option>
                             <option value="student">Student</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="form-control" name="role">
-                            {% for group in groups %}
-                                <option value="{{ group.id }}">{{group.group_name}}</option>
-                            {% endfor %}
                         </select>
                     </td>
                     <td>

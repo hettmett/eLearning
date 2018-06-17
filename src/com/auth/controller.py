@@ -3,11 +3,39 @@ from flask_mail import Mail, Message
 from flask import session, current_app as app
 from com.auth.models.users import Users
 from conf import sys_conf
+from com.groups.controller import GroupsController
 
 
 class AuthController(object):
     def __init__(self):
         super().__init__()
+    #
+    # def login(self, email: str, pwd: str):
+    #     if len(pwd) == 0:
+    #         raise Exception('Password required')
+    #     if len(email) == 0:
+    #         raise Exception('Email required')
+    #     if not self.is_valid_email(email):
+    #         raise Exception('Email not valid')
+    #
+    #     user = Users.login(email, pwd)
+    #     group_name = GroupsController.get_all_groups_by_teacher(user.id)
+    #     course_name = GroupsController.get_course_name(user.id)
+    #
+    #     print(f'course_name = {course_name}, group_name = {group_name}')
+    #
+    #     print(user)
+    #
+    #     if user is not None:
+    #         session['user'] = {'id': user.id,
+    #                            'role': user.role,
+    #                            'fnm': user.first_name,
+    #                            'lnm': user.last_name,
+    #                            'gnm': group_name,
+    #                            'cnm': course_name}
+    #         print(f'session = {session["user"]}')
+    #         return True
+    #     return False
 
     def login(self, email: str, pwd: str):
         if len(pwd) == 0:
@@ -17,12 +45,19 @@ class AuthController(object):
         if not self.is_valid_email(email):
             raise Exception('Email not valid')
         user = Users.login(email, pwd)
+
+        group_name = GroupsController.get_all_groups_by_teacher(user.id)
+        course_name = GroupsController.get_course_name(user.id)
+        print(f'course_name = {course_name}, group_name = {group_name}')
+
         if user is not None:
-            session['user'] = {'id': user.id, 'role': user.role, 'fnm': user.first_name, 'lnm': user.last_name}
+            session['user'] = {'id': user.id,
+                               'role': user.role,
+                               'fnm': user.first_name,
+                               'lnm': user.last_name}
             print(f'session = {session["user"]}')
             return True
         return False
-
     def send_mail(self, email, token):
         app.config['MAIL_SERVER'] = 'smtp.gmail.com'
         app.config['MAIL_PORT'] = 465

@@ -31,6 +31,9 @@ class Lessons(Base):
         DB.add(lesson)
         DB.commit()
 
+    @staticmethod
+    def get_all():
+        return DB.query(Lessons).all()
 
 
     @staticmethod

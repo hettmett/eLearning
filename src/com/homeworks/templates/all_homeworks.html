@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Last 10 homeworks {% endblock %}
+{% block title %} All homeworks {% endblock %}
 {% block user_name %} {{ user_name }} {% endblock %}
 
 {% block content %}
@@ -23,12 +23,10 @@
                                     <th> Lesson_ID</th>
                                     <th> Title</th>
                                     <th> Description</th>
-                                    <th> File path</th>
+{#                                    <th> File path</th>#}
                                     <th> Deadline</th>
-                                    <th> Created</th>
-                                    <th> Modified</th>
                                     <th></th>
-                                    <th><a href="new" class="btn btn-primary mr-10">Create</a></th>
+                                    <th><a href="add" class="btn btn-primary mr-10">Create</a></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,10 +37,8 @@
                                             <td> {{ homework.lesson_id }} </td>
                                             <td> {{ homework.title }} </td>
                                             <td> {{ homework.description }} </td>
-                                            <td> {{ homework.file_path }} </td>
+{#                                            <td> {{ homework.file_path }} </td>#}
                                             <td> {{ homework.deadline }} </td>
-                                            <td> {{ homework.created }} </td>
-                                            <td> {{ homework.modified }} </td>
                                             <td><a href="edit/{{ homework.id }}" class="btn btn-success" role="button">
                                                 Edit </a></td>
                                             <td><a href="delete/{{ homework.id }}" class="btn btn-danger" role="button">

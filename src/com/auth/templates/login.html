@@ -11,42 +11,40 @@
 
 
 {% block login_content %}
-    <div class="wrapper box-layout theme-6-active pimary-color-green">
-        <div class="container-fluid pt-25">
-            <div class="auth-form  ml-auto mr-auto no-float">
-                <div class="row">
-                    <div class="col-sm-9 col-xs-9">
-                        <div class="mb-30">
-                            <h3 class="text-center txt-dark mb-10">Sign in to Droopy</h3>
-                            <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
-                        </div>
-                        <div class="form-wrap">
-                            <form method="POST">
-                                <div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputEmail_2">
-                                        Email address
-                                    </label>
-                                    <input type="email" name="email" class="form-control" placeholder="Enter email"
-                                           pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
-                                           required autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <label class="pull-left control-label mb-10"
-                                           for="exampleInputpwd_2">Password</label>
-                                    <div class="clearfix"></div>
-                                    <input type="password" name="password" class="form-control" required autofocus
-                                           placeholder="Enter pwd">
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="submit" class="btn btn-success">Sign In</button>
-                                </div>
-                            </form>
-                        </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+
+        <div class="col-md-3 col-sm-5 col-xs-6">
+            <div class="mb-30">
+                <h3 class="text-center txt-dark mb-10">Sign in to Droopy</h3>
+                <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
+            </div>
+            <div class="form-wrap">
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="control-label mb-10" for="exampleInputEmail_2">
+                            Email address
+                        </label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter email"
+                               pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                               required autofocus>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="pull-left control-label mb-10"
+                               for="exampleInputpwd_2">Password</label>
+                        <div class="clearfix"></div>
+                        <input type="password" name="password" class="form-control" required autofocus
+                               placeholder="Enter pwd">
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success">Sign In</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    </div>
+
 
 {% endblock %}
 

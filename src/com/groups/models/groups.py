@@ -84,13 +84,24 @@ class Groups(Base):
     def all_students():
         return DB.query(Users.id, Users.first_name, Users.last_name).filter(Users.role == "student").all()
 
+    @staticmethod
     def get_all_groups():
         try:
-            all = DB.query(Groups.id,Groups.group_name).all()
+            all = DB.query(Groups.id, Groups.group_name).all()
             return all
         except:
             DB.rollback()
 
-#sql_cmd = DB.text("select groups.group_name,users.first_name,courses.course_name from groups INNER JOIN "
- #                               "users ON groups.teacher_id = users.id JOIN courses ON groups.course_id = courses.id")
-  #          results = db.execute(sql_cmd).fetchall()
+    # **********************************************************************************************
+    @staticmethod
+    def get_course_name(teacher_id: int):
+        course_id = DB.query(Groups.course_id).filter_by(teacher_id=teacher_id).first()
+        course_name = DB.query(Courses.course_name).filter_by(id=course_id).first()
+        # course_name = DB.execute("select groups.group_name, courses.course_name from groups "
+        #                     "INNER JOIN courses ON groups.course_id = courses.id "
+        #                     "where  groups.teacher_id = ?", teacher_id)
+        return course_name
+
+    @staticmethod
+    def get_all_groups_by_teacher(teacher_id: int):
+        return DB.query(Groups.group_name).filter_by(teacher_id=teacher_id).all()

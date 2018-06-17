@@ -15,7 +15,7 @@
                 <div class="panel-wrapper collapse in">
                     <div class="panel-body">
                         <div class="table-wrap">
-                            <form method="POST">
+                            <form method="POST" enctype="multipart/form-data">
                                 <table id="myTable1" class="table table-hover display  pb-30">
                                     <tr>
                                         <th><label for="lesson_id">Lesson_Id</label>
@@ -27,22 +27,21 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="lesson_id"
-                                                   value="{{ homework.lesson_id }}" required autofocus>
+                                            <select name="lesson_id">
+                                                {% for lesson in lessons %}
+                                                    <option value="{{ lesson.id }}">{{ lesson.title }}</option>
+                                                {% endfor %}
+                                            </select>
                                         </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="title"
+                                        <td><input type="text" class="form-control" name="title"
                                                    value="{{ homework.title }}" required autofocus>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="description"
                                                    value="{{ homework.description }}" required autofocus>
-
                                         </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="file_path"
-                                                   value="{{ homework.file_path }}" required autofocus>
-                                        </td>
+                                        <td><input type="file" class="form-control" name="file_path"
+                                                   required autofocus></td>
                                         <td>
                                             <input type="date" class="form-control" name="deadline"
                                                    value="{{ homework.deadline }}" required autofocus>

@@ -27,5 +27,8 @@ class LessonsController(object):
     def all(self, group_id):
         return Lessons.get_lessons_by_group_id(group_id)
 
+    def get_all(self):
+        return Lessons.get_all()
+
     def find_by_id(self, id):
         return Lessons.find_by_id(id)

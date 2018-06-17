@@ -5,7 +5,7 @@ from flask import session, flash, redirect, url_for
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if session['user']['id']:
+        if session.get('user', {}).get('id'):
             return func(*args, **kwargs)
         flash('Please Login !')
         return redirect(url_for('auth.login'))
