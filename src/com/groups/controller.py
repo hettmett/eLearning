@@ -9,6 +9,9 @@ class GroupsController(object):
     def all(self):
         return Groups.all()
 
+    def get_all(self):
+        return Groups.get_all()
+
     def new(self, fields: list):
         self.form_is_valid(fields)
         return Groups.new(fields)

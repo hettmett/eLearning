@@ -95,6 +95,7 @@ try:
             group_id integer,
             title text,
             lessons text,
+            count integer,
             start_time text,
             create_date text DEFAULT (datetime('now','localtime')),
             modified_date,
@@ -115,6 +116,7 @@ try:
             student_quiz_id integer,
             start_date text,
             submission_date text DEFAULT (datetime('now','localtime')),
+            rate integer,
             FOREIGN KEY (student_quiz_id) REFERENCES users(id)
         );
         CREATE TABLE IF NOT EXISTS submitted_answers(

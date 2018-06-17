@@ -16,13 +16,14 @@
                 <div class="panel-wrapper collapse in">
                     <div class="panel-body">
                         <div class="table-wrap">
-                            <table id="myTable_quiz" class="table table-hover display  pb-30">
+                          <table id="myTable1" class="table table-hover display  pb-30">
                                 <thead>
                                 <tr>
                                     <th> ID</th>
                                     <th> Title</th>
                                     <th> Group</th>
                                     <th> Lessons</th>
+                                    <th> Number of questions</th>
                                     <th> Start date</th>
                                     <th> Duration</th>
                                     <th></th>
@@ -37,6 +38,7 @@
                                           <td> {{ quiz.title }} </td>
                                           <td> {{ quiz.group_id }} </td>
                                           <td> {{ quiz.lessons }} </td>
+                                          <td> {{ quiz.count }} </td>
                                           <td> {{ quiz.start_time }} </td>
                                           <td> {{ quiz.duration }} </td>
                                           <td><a href="edit/{{ quiz.id }}" class="btn btn-success" role="button">

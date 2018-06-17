@@ -32,12 +32,16 @@
                                                    value="{{ quiz.title }}" required autofocus>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="group_id"
-                                                   value="{{ quiz.group_id }}" required autofocus>
+                                          <select class="form-control" name="group_id">
+                                          <option selected disabled hidden>{{group.group_name}}</option>
+                                              {%for group in groups%}
+                                              <option value="{{group.id}}">{{group.group_name}}</option>
+                                              {%endfor%}
+                                          </select>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="lessons"
-                                                   value="{{ quiz.lessons }}" required autofocus>
+                                                   value="{{ lesson_ids }}" required autofocus>
 
                                         </td>
                                         <td>

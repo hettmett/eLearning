@@ -29,10 +29,18 @@
                                     <tr>
                                     <td><input type="text" class="form-control" name="title"
                                                  value="{{ title }}" required autofocus></td>
-                                    <td><input type="text" class="form-control" name="group_id"
-                                               value="{{ group_id }}" required autofocus></td>
-                                    <td><input type="text" class="form-control" name="lesson_ids"
-                                               value="{{ lesson_ids }}" required autofocus></td>
+                                    <td><select class="form-control" name="group_id">
+                                        <option selected disabled hidden>Choose here</option>
+                                        {%for group in groups%}
+                                        <option value="{{group.id}}">{{group.group_name}}</option>
+                                        {%endfor%}
+                                        </select>
+                                    </td>
+                                    <td><select class="selectpicker"name = "lesson_ids" multiple data-style="form-control btn-default btn-outline">
+                                                                <option>Mustard</option>
+                                                                <option>Ketchup</option>
+                                                                <option>Relish</option>
+                                         </select></td>
                                     <td><input type="text" class="form-control" name="count"
                                                value="{{ count }}" required autofocus></td>
                                     <td><input type="date" class="form-control" name="start_time"

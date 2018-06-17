@@ -71,7 +71,7 @@ class Group_student(Base):
     @staticmethod
     def get_student(id: int):
         try:
-            return DB.query(Group_student.user_id).filter(Group_student.group_id == id).all()
+            return DB.query(Group_student).filter(Group_student.group_id == id).all()
         except:
             DB.rollback()
 

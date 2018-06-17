@@ -20,6 +20,14 @@ class Groups(Base):
 
 
     @staticmethod
+    def get_all():
+        try:
+            return DB.query(Groups).all()
+        except Exception:
+            DB.rollback()
+
+
+    @staticmethod
     def all():
             #all = DB.query(Groups).all()
             result = DB.execute("select groups.group_name,users.first_name,courses.course_name from groups INNER JOIN "
@@ -44,10 +52,10 @@ class Groups(Base):
             end_date=fields[3],
             create_date = fields[4],
             teacher_id = fields[5]))
-        """
-        DB.execute("INSERT INTO groups (group_name,course_id, start_date, end_date, create_date, teacher_id)"
-                   "VALUES ("+fields[0]+","+fields[1]+","+fields[2]+","+fields[3]+","+fields[4]+","+fields[5]+")")
-        """
+        #
+        # DB.execute("INSERT INTO groups (group_name,course_id, start_date, end_date, create_date, teacher_id)"
+        #            "VALUES ("+fields[0]+","+fields[1]+","+fields[2]+","+fields[3]+","+fields[4]+","+fields[5]+")")
+
         DB.commit()
        # except:
        #     DB.rollback()
@@ -92,6 +100,7 @@ class Groups(Base):
         except:
             DB.rollback()
 
+<<<<<<< HEAD
     # **********************************************************************************************
     @staticmethod
     def get_course_name(teacher_id: int):
@@ -105,3 +114,8 @@ class Groups(Base):
     @staticmethod
     def get_all_groups_by_teacher(teacher_id: int):
         return DB.query(Groups.group_name).filter_by(teacher_id=teacher_id).all()
+=======
+#sql_cmd = DB.text("select groups.group_name,users.first_name,courses.course_name from groups INNER JOIN "
+ #                               "users ON groups.teacher_id = users.id JOIN courses ON groups.course_id = courses.id")
+  #          results = db.execute(sql_cmd).fetchall()
+>>>>>>> 1e12da570cc86315673107873b6026d2e7c7635b
