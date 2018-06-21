@@ -32,7 +32,6 @@ class Questions(Base):
             ).all()
 
         except Exception:
-            return 'bad'
             DB.rollback()
 
     @staticmethod
@@ -92,6 +91,18 @@ class Answers(Base):
         """Finding tha record in the table by id."""
         try:
             return DB.query(Answers).filter(Answers.id == id).first()
+        except Exception:
+            DB.rollback()
+
+    @staticmethod
+    def get_by_questions(questions: set):
+        """Selecting questions by question_id."""
+        try:
+            return DB.execute('''SELECT answers.*, questions.question
+                              FROM answers LEFT JOIN questions
+                              ON answers.question_id=questions.id
+                              where answers.question_id in {}'''.format(questions))
+# .format(questions)))
         except Exception:
             DB.rollback()
 
@@ -178,11 +189,18 @@ class Quizes(Base):
             DB.rollback()
 
     @staticmethod
+<<<<<<< Updated upstream
     def all_by_teacher_id(teacher_id: int):
         """Finding record in the table by id."""
         try:
             return DB.query(Quizes).filter(
                 Quizes.teacher_id == teacher_id).all()
+=======
+    def find_by_ids(ids: int):
+        """Finding record in the table by id."""
+        try:
+            return DB.query(Quizes).filter(Quizes.id in ids).all()
+>>>>>>> Stashed changes
         except Exception:
             DB.rollback()
 
@@ -194,6 +212,7 @@ class Quizes(Base):
                 Quizes.student_id == student_id).all()
         except Exception:
             DB.rollback()
+
 
     def __repr__(self):
         """Representation of single row."""
@@ -245,6 +264,11 @@ class Student_quizes(Base):
         DB.commit()
         # except Exception:
         #     DB.rollback()
+<<<<<<< Updated upstream
+
+    @staticmethod
+    def get_by_quiz_id(quiz_id: int):
+=======
 
     @staticmethod
     def get_by_quiz_id(quiz_id: int):
@@ -255,12 +279,34 @@ class Student_quizes(Base):
         except Exception:
             DB.rollback()
 
-    def __repr__(self):
-        """Representation of single row."""
-        return "student_id = {}\n" \
-               "questions = {}".format(self.teacher_id,
-                                       self.quiz_id,
-                                       self.questions)
+    @staticmethod
+    def all_by_student_id(student_id: int):
+>>>>>>> Stashed changes
+        """Finding record in the table by id."""
+        # try:
+        return DB.execute('''SELECT quizes.*,  student_quizes.student_id
+                          FROM quizes LEFT JOIN student_quizes
+                          ON student_quizes.quiz_id=quizes.id
+                          where student_quizes.student_id={}'''.format(student_id))
+        # return DB.query(Student_quizes).filter(
+        #     Student_quizes.student_id == student_id).all()
+
+    @staticmethod
+    def find_by_id(id: int):
+        try:
+            return DB.query(Student_quizes).\
+                filter(Student_quizes.id == id).first()
+        except Exception:
+            DB.rollback()
+
+
+
+    # def __repr__(self):
+    #     """Representation of single row."""
+    #     return "student_id = {}\n" \
+    #            "questions = {}".format(
+    #                                     self.quiz_id,
+    #                                    self.questions)
 
 
 class Quiz_submission(Base):

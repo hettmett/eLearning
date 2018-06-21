@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %} Submited homeworks {% endblock %}
+{% block title %} Last 10 homeworks {% endblock %}
 {% block user_name %} {{ user_name }} {% endblock %}
 
 {% block content %}
     <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">My submited homeworks</h5>
+            <h5 class="txt-dark">Homeworks DataTable</h5>
         </div>
     </div>
 
@@ -21,6 +21,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>HOMEWORK ID</th>
+                                    <th>USER ID</th>
                                     <th>DESCRIPTION</th>
                                     <th>SUBMITTED</th>
                                 </tr>
@@ -31,6 +32,7 @@
                                         <tr>
                                             <td> <a href="/completed_homeworks/by_id/{{ homework.id }}"> {{ homework.id }} </a></td>
                                             <td> {{ homework.homework_id }} </td>
+                                            <td> {{ homework.user_id }} </td>
                                             <td> {{ homework.description }} </td>
                                             <td> {{ homework.submission_date }} </td>
                                         </tr>

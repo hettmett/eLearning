@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %} Last 10 groups {% endblock %}
+{% block title %} Last 10 student {% endblock %}
 
 {% block content %}
     <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">Courses DataTable</h5>
+            <h5 class="txt-dark">All students in group</h5>
         </div>
     </div>
 
@@ -18,35 +18,34 @@
                             <table id="myTable1" class="table table-hover display  pb-30">
                                 <thead>
                                 <tr>
-                                    <th> ID </th>
-                                    <th> Title </th>
-                                    <th> Description </th>
-                                    <th> Created </th>
-                                    <th> </th>
-                                    <th> <a href="new" class="btn btn-primary" role="button">Create</a> </th>
+                                    <th> Title</th>
+                                    <th> Description</th>
+                                    <th> Created</th>
+                                    {% if session['user']['role'] == 'admin' %}
+                                        <th><a href="new_student" class="btn btn-primary" role="button">Add student</a>
+                                        </th>
+                                        <th><a href="/groups" class="btn btn-info"> Back </a></th>
+                                    {% endif %}
                                 </tr>
                                 </thead>
-                                    <tbody>
-                                    {% if groups=="None" %}
-                                    {% for groups in groups %}
+                                <tbody>
+                                {% if student != None %}
+                                    {% for student in student %}
                                         <tr>
-                                            <td><a href="{{ groups.id }}"> {{ groups.id }} </a></td>
-                                            <td> {{ groups.course_name }} </td>
-                                            <td> {{ groups.description }} </td>
-                                            <td> {{ groups.created }} </td>
-                                            <td>
-                                                <a href="edit/{{ groups.id }}" class="btn btn-success" role="button">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="delete/{{ groups.id }}" class="btn btn-danger" role="button">
-                                                    Delete
-                                                </a>
-                                            </td>
+                                            <td> {{ student.first_name }} {{ student.last_name }} </td>
+                                            <td> {{ student.group_name }} </td>
+                                            <td> {{ student.create_date }}</td>
+                                            {% if session['user']['role'] == 'admin' %}
+                                                <td>
+                                                    <a href="delete/{{ student.id }}/{{ student.group_id }}"
+                                                       class="btn btn-danger" role="button"> Delete
+                                                    </a>
+                                                </td>
+                                                <td></td>
+                                            {% endif %}
                                         </tr>
                                     {% endfor %}
-                                    {% endif %}
+                                {% endif %}
                                 </tbody>
                             </table>
                         </div>

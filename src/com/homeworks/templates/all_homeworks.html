@@ -5,7 +5,7 @@
 {% block content %}
     <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">Homeworks DataTable</h5>
+            <h5 class="txt-dark">Homeworks </h5>
         </div>
     </div>
 
@@ -16,34 +16,100 @@
                 <div class="panel-wrapper collapse in">
                     <div class="panel-body">
                         <div class="table-wrap">
+                            {% if session['user']['role'] == 'teacher' %}
+                            <a href="/completed_homeworks/by_lesson/{{ lesson_id }}"
+                               data-toggle="collapse"
+                               data-target="#ecom_dr"
+                               class="btn btn-success">
+                                <div class="pull-left"><i class="fa fa-home mr-20"></i>
+                                    <span class="right-nav-text">Submitted</span>
+                                </div>
+                            </a>
+                            {% endif %}
+                            {% if session['user']['role'] == 'student' %}
+                            <a href="/completed_homeworks/by_student/{{session['user']['id']}}"
+                               data-toggle="collapse"
+                               data-target="#ecom_dr"
+                               class="btn btn-success">
+                                <div class="pull-left"><i class="fa fa-home mr-20"></i>
+                                    <span class="right-nav-text">Submitted</span>
+                                </div>
+                            </a>
+                            {% endif %}
                             <table id="myTable1" class="table table-hover display  pb-30">
                                 <thead>
                                 <tr>
                                     <th> ID</th>
-                                    <th> Lesson_ID</th>
                                     <th> Title</th>
                                     <th> Description</th>
+<<<<<<< Updated upstream
 {#                                    <th> File path</th>#}
                                     <th> Deadline</th>
                                     <th></th>
                                     <th><a href="add" class="btn btn-primary mr-10">Create</a></th>
+=======
+                                    <th> Deadline</th>
+                                    {% if session['user']['role'] == 'teacher' %}
+                                        <th></th>
+                                        <th><a href="add" class="btn btn-primary mr-10">Create</a></th>
+                                    {% endif %}
+                                    <th></th>
+>>>>>>> Stashed changes
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% if homeworks != None %}
                                     {% for homework in homeworks %}
                                         <tr>
-                                            <td><a href="{{ homework.id }}"> {{ homework.id }} </a></td>
-                                            <td> {{ homework.lesson_id }} </td>
+                                            <td><a href="{{ lesson_id }}/{{ homework.id }}" class="btn btn-default">
+                                                {{ homework.id }} </a>
+                                            </td>
                                             <td> {{ homework.title }} </td>
                                             <td> {{ homework.description }} </td>
+<<<<<<< Updated upstream
 {#                                            <td> {{ homework.file_path }} </td>#}
                                             <td> {{ homework.deadline }} </td>
                                             <td><a href="edit/{{ homework.id }}" class="btn btn-success" role="button">
                                                 Edit </a></td>
                                             <td><a href="delete/{{ homework.id }}" class="btn btn-danger" role="button">
                                                 Delete </a></td>
+=======
+                                            <td> {{ homework.deadline }} </td>
+                                            {% if session['user']['role'] == 'teacher' %}
+                                                <td><a href="edit/{{ homework.id }}" class="btn btn-success"
+                                                       role="button">
+                                                    Edit </a></td>
+                                                <td><a href="delete/{{ homework.id }}" class="btn btn-danger"
+                                                       role="button">
+                                                    Delete </a></td>
+                                            {% endif %}
+                                            {% if session['user']['role'] == 'teacher' %}
+                                                <td>
+                                                    <a href="/completed_homeworks/by_homework/{{ homework.id }}"
+                                                       data-toggle="collapse"
+                                                       data-target="#ecom_dr"
+                                                       class="btn btn-success">
+                                                        <div class="pull-left"><i class="fa fa-home mr-20"></i>
+                                                            <span class="right-nav-text">Submitted</span>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                            {% if session['user']['role'] == 'student' %}
+                                                <td>
+                                                    <a href="/completed_homeworks/{{ session['user']['id'] }}/{{ homework.id }}/add"
+                                                       data-toggle="collapse"
+                                                       data-target="#ecom_dr"
+                                                       class="btn btn-success">
+                                                        <div class="pull-left"><i class="fa fa-home mr-20"></i>
+                                                            <span class="right-nav-text">Submit</span>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+>>>>>>> Stashed changes
                                         </tr>
+
                                     {% endfor %}
                                 {% endif %}
                                 </tbody>

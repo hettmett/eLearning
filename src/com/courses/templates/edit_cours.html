@@ -1,26 +1,45 @@
 {% extends "base.html" %}
-{% block title %} Edit homework {% endblock %}
+{% block title %} Edit course N{{ fields.id }} {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <form method="POST">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col"><label for="title">Title</label></th>
-                    <th scope="col"><label for="description">Description</label></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tr>
-                    <td><input type="text" class="form-control" name="course_name" value="{{ fields.course_name }}"></td>
-                    <td><input type="text" class="form-control" name="description" value="{{ fields.description }}">
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Update</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Edit course N{{ fields.id }}</h3>
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <form method="POST">
+                            <div class="table-wrap">
+                                <table id="myTable1" class="table table-hover display  pb-30">
+                                    <thead>
+                                    <tr>
+                                        <th><label for="title">Title</label></th>
+                                        <th><label for="description">Description</label></th>
+                                        <th>
+                                            <a href="/courses" class="btn btn-info">Back</a>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tr>
+                                        <td><input type="text" class="form-control" name="course_name"
+                                                   value="{{ fields.course_name }}"></td>
+                                        <td><input type="text" class="form-control" name="description"
+                                                   value="{{ fields.description }}">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success">Update</button>
+                                        </td>
+                                        <td> </td>
+                                    </tr>
+                                    </tboby>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

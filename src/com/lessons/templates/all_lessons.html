@@ -2,43 +2,62 @@
 {% block title %} All lessons {% endblock %}
 
 {% block content %}
-<!-- Row -->
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default card-view">
-            <div class="panel-wrapper collapse in">
-                <div class="panel-body">
-                    <div class="table-wrap">
-                        <table id="myTable1" class="table table-hover display  pb-30">
-                            <thead>
-                            <tr>
-                                <th> ID</th>
-                                <th> Title</th>
-                                <th> Description</th>
-                                <th> Lesson date</th>
-                                <th></th>
-                                <th><a href="{{group_id}}/new" class="btn btn-primary" role="button">Create New</a></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for lesson in all_lessons %}
-                            <tr>
-                                <td><a href="{{group_id}}/{{ lesson.id }}"> {{ lesson.id }} </a></td>
-                                <td> {{ lesson.title }}</td>
-                                <td> {{ lesson.description }}</td>
-                                <td> {{ lesson.lesson_date }}</td>
-                                <td><a href="{{group_id}}/edit/{{ lesson.id }}" class="btn btn-success" role="button">
-                                    Edit </a></td>
-                                <td><a href="{{group_id}}/delete/{{ lesson.id }}" class="btn btn-danger" role="button">
-                                    Delete </a></td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <table id="myTable1" class="table table-hover display  pb-30">
+                                <thead>
+                                <tr>
+                                    <th> ID</th>
+                                    <th> Title</th>
+                                    <th> Description</th>
+                                    <th> Lesson date</th>
+                                    {% if session['user']['role'] == 'teacher' %}
+                                        <th></th>
+                                        <th><a href="{{ group_id }}/new" class="btn btn-primary" role="button">
+                                            Create New</a></th>
+                                    {% endif %}
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for lesson in all_lessons %}
+                                    <tr>
+                                        <td><a href="{{ group_id }}/{{ lesson.id }}" class="btn btn-default">
+                                            {{ lesson.id }} </a>
+                                        </td>
+                                        <td> {{ lesson.title }}</td>
+                                        <td> {{ lesson.description }}</td>
+                                        <td> {{ lesson.lesson_date }}</td>
+                                        {% if session['user']['role'] == 'teacher' %}
+                                            <td><a href="{{ group_id }}/edit/{{ lesson.id }}" class="btn btn-success"
+                                                   role="button">
+                                                Edit </a></td>
+                                            <td><a href="{{ group_id }}/delete/{{ lesson.id }}" class="btn btn-danger"
+                                                   role="button">
+                                                Delete </a></td>
+                                        {% endif %}
+                                        <td>
+                                            <a href="/homeworks/{{ lesson.id }}" data-toggle="collapse"
+                                               data-target="#ecom_dr"
+                                               class="btn btn-primary" style="margin-right: 25px">
+                                                <div class="pull-left"><i class="fa fa-home mr-20"></i>
+                                                    <span class="right-nav-text">Homeworks</span>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

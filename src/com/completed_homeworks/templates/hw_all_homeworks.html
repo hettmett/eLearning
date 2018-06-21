@@ -5,7 +5,7 @@
 {% block content %}
     <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">My submited homeworks</h5>
+            <h5 class="txt-dark">Submited homeworks</h5>
         </div>
     </div>
 
@@ -20,7 +20,6 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>HOMEWORK ID</th>
                                     <th>DESCRIPTION</th>
                                     <th>SUBMITTED</th>
                                 </tr>
@@ -29,8 +28,7 @@
                                 {% if homeworks != None %}
                                     {% for homework in homeworks %}
                                         <tr>
-                                            <td> <a href="/completed_homeworks/by_id/{{ homework.id }}"> {{ homework.id }} </a></td>
-                                            <td> {{ homework.homework_id }} </td>
+                                            <td> <a href="/completed_homeworks/by_id/{{ homework.id }}"> {{ homework.id }} </a> </td>
                                             <td> {{ homework.description }} </td>
                                             <td> {{ homework.submission_date }} </td>
                                         </tr>

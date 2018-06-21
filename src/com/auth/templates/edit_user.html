@@ -2,6 +2,7 @@
 {% block title %} Edit homework {% endblock %}
 
 {% block content %}
+<<<<<<< Updated upstream
     <div class="container">
         <form method="POST">
             <table class="table table-striped table-bordered">
@@ -36,5 +37,54 @@
                 </tr>
             </table>
         </form>
+=======
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default card-view">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="table-wrap">
+                            <form method="POST" enctype="multipart/form-data">
+                                <table id="myTable1" class="table table-hover display pb-30">
+                                    <tr>
+                                        <th scope="col"><label for="first_name">First Name</label>
+                                        <th scope="col"><label for="last_name">Last Name</label></th>
+                                        <th scope="col"><label for="middle_name">Middle Name</label></th>
+                                        <th scope="col"><label for="email">Email</label></th>
+                                        <th scope="col"><label for="birth_date">Birth_date</label></th>
+                                        <th scope="col"><label for="role">Role</label></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" name="first_name"
+                                                   value="{{ user.first_name }}"></td>
+                                        <td><input type="text" class="form-control" name="last_name"
+                                                   value="{{ user.last_name }}"></td>
+                                        <td><input type="text" class="form-control" name="middle_name"
+                                                   value="{{ user.middle_name }}">
+                                        </td>
+                                        <td><input type="text" class="form-control" name="email"
+                                                   value="{{ user.email }}"></td>
+                                        <td><input type="date" class="form-control" name="birth_date"
+                                                   value="{{ user.birth_date }}"></td>
+                                        <td>
+                                            <select class="form-control" name="role">
+                                                <option value="admin">Admin</option>
+                                                <option value="teacher">Teacher</option>
+                                                <option value="student">Student</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success">Update</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+>>>>>>> Stashed changes
     </div>
 {% endblock %}

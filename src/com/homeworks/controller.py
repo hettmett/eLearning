@@ -12,7 +12,11 @@ class HomeworksController(object):
         return Homeworks.all()
 
     def upload(self, file):
+<<<<<<< Updated upstream
         up_folder = 'C:\\Python36\\Projects\\FLASK\\ACA\\eLearning\\src\\static\\uploaded_files'
+=======
+        up_folder = 'C:\\Program Files\\Python36\\Python_projects\\FLASK\\ACA\\eLearning\\src\\static\\uploaded_files'
+>>>>>>> Stashed changes
         file_path = 'file not attached'
         if file:
             fname = secure_filename(file.filename)

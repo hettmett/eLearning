@@ -11,10 +11,11 @@ class LessonsController(object):
         return Lessons.new(group_id, title, description, file_path, lesson_date)
 
     def upload(self, file):
-        UPLOAD_FOLDER = 'C:\\Python36\\Projects\\FLASK\\ACA\\eLearning\\src\\static\\uploaded_files'
+        upload_path = 'C:\\Program Files\\Python36\\Python_projects\\FLASK\\ACA\\eLearning\\src\\static\\uploaded_files'
+        file_path = 'file not attached'
         if file:
             filename = secure_filename(file.filename)
-            file_path = path.join(UPLOAD_FOLDER, filename)
+            file_path = path.join(upload_path, filename)
             file.save(file_path)
         return file_path
 
@@ -33,5 +34,12 @@ class LessonsController(object):
     def find_by_id(self, id):
         return Lessons.find_by_id(id)
 
+<<<<<<< Updated upstream:src/com/lessons/controller.py
     def get_all(self):
         return Lessons().get_all()
+=======
+    def get_all_by_teacher_id(self, teacher_id: int):
+        return Lessons.get_all_by_teacher_id(teacher_id)
+
+
+>>>>>>> Stashed changes:src/com/lessons/controller.py

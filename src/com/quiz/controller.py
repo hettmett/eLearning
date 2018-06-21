@@ -19,6 +19,7 @@ class QuizController(object):
 
     def questions_sampling(self, lessons: list, count: int) -> list:
         # Selecting questions by lessons and sampling to requied amount
+<<<<<<< Updated upstream
         questions = Questions.get_by_lessons(lessons)
         questions = list(questions)
         selected_questions = random.sample(questions, count)
@@ -26,6 +27,19 @@ class QuizController(object):
         for i in range(count):
             quiz.append(selected_questions[i].id)
         return quiz
+=======
+        try:
+            questions = Questions.get_by_lessons(lessons)
+            questions = list(questions)
+            selected_questions = random.sample(questions, count)
+            quiz = []
+            for i in range(count):
+                quiz.append(selected_questions[i].id)
+            return quiz
+        except Exception:
+            flash('Not enough questions for selected lessons')
+
+>>>>>>> Stashed changes
 
     def quiz_instance(self, lessons: str, count: int,
                       quiz_id: int, group_id: int):
@@ -39,7 +53,10 @@ class QuizController(object):
                       duration: str, count: str):
         # adding metadata to Quiz table
         lessons = json.dumps(lessons)
+<<<<<<< Updated upstream
         flash(lessons)
+=======
+>>>>>>> Stashed changes
         quiz_id = Quizes.add(teacher_id, group_id, title, lessons,
                              start_time, duration, create_date, count)
         # Selecting questions and writing quizes to Student quizes table
@@ -49,7 +66,14 @@ class QuizController(object):
         return Quizes().all_by_teacher_id(teacher_id)
 
     def get_all_by_student_id(self, student_id):
+<<<<<<< Updated upstream
         return Quizes().all_by_student_id(student_id)
+=======
+        ids = Student_quizes().all_by_student_id(student_id)
+        return ids
+        #Quizes().find_by_ids(ids)
+
+>>>>>>> Stashed changes
 
     def find_by_id(self, id):
         return Quizes.find_by_id(id)
@@ -70,3 +94,12 @@ class QuizController(object):
         Student_quizes().remove_by_quiz_id(quiz_id)
         # removing quiz table data
         Quizes().remove(quiz_id)
+<<<<<<< Updated upstream
+=======
+
+    @staticmethod
+    def get_quiz_data(student_quiz_id: int):
+        questions = tuple(Student_quizes.find_by_id(student_quiz_id).questions)
+        data = Answers.get_by_questions(questions)
+        return data
+>>>>>>> Stashed changes

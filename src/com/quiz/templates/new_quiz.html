@@ -36,11 +36,25 @@
                                         {%endfor%}
                                         </select>
                                     </td>
+<<<<<<< Updated upstream
                                     <td><select class="selectpicker"name = "lesson_ids" multiple data-style="form-control btn-default btn-outline">
                                                                 <option>Mustard</option>
                                                                 <option>Ketchup</option>
                                                                 <option>Relish</option>
                                          </select></td>
+=======
+                                    <td>
+                                      <!-- <select class="selectpicker" multiple data-style="form-control btn-default btn-outline"
+                                              name="lesson_ids">
+                                              {% for lesson in lessons %}
+                                                  <option value="{{lesson.id}}">{{lesson.id}}</option>
+                                              {% endfor %} -->
+                                      <!-- </select> -->
+                                      <input type="text" class="form-control" name="lesson_ids"
+                                                 value="{{ lessons }}" required autofocus>
+
+                                    </td>
+>>>>>>> Stashed changes
                                     <td><input type="text" class="form-control" name="count"
                                                value="{{ count }}" required autofocus></td>
                                     <td><input type="date" class="form-control" name="start_time"

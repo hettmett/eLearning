@@ -3,19 +3,26 @@ from datetime import datetime
 from flask import render_template, request, session, url_for, flash, redirect
 from com.groups.controller import GroupsController
 from com.auth.controller import AuthController
+<<<<<<< Updated upstream
 from com.groups.controller import GroupsController
 from datetime import datetime
 from com.auth import login_required
+=======
+from com.auth import login_required, role_required
+>>>>>>> Stashed changes
 
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
 
+<<<<<<< Updated upstream
 @auth.route('/')
 @login_required
 def index():
     return render_template('index.html')
 
 
+=======
+>>>>>>> Stashed changes
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -23,8 +30,7 @@ def login():
         password = request.form.get('password').strip()
         try:
             if AuthController().login(email, password):
-                flash(f"{email} logged in successfully")
-                return redirect(url_for('auth.index'))
+                return redirect(url_for('dashboard.Dashboard'))
             else:
                 raise Exception(f"`{email}` user not found !")
         except Exception as ex:
@@ -40,6 +46,10 @@ def logout():
 
 
 @auth.route('/users/add', methods=["GET", "POST"])
+<<<<<<< Updated upstream
+=======
+@role_required('admin')
+>>>>>>> Stashed changes
 def add():
     if request.method == "POST":
         first_name = request.form.get('first_name').strip().strip('\n')
@@ -65,6 +75,7 @@ def sign_up(token):
 
 
 @auth.route('/reset-password/<token>/<id>', methods=["GET", "POST"])
+@role_required('admin')
 def reset_password(token=None, id=None):
     if request.method == "POST":
         password = request.form.get('password').strip().strip('\n')
@@ -87,6 +98,7 @@ def reset_password(token=None, id=None):
 
 @auth.route('/users')
 @login_required
+@role_required('admin')
 def show_all():
     all = AuthController().get_all()
     return render_template('users_table.html', users=all)
@@ -94,6 +106,7 @@ def show_all():
 
 @auth.route('/edit/<id>', methods=['GET', 'POST'])
 @login_required
+@role_required('admin')
 def edit(id):
     user = AuthController().find_by_id(id)
     print(user)
@@ -117,6 +130,7 @@ def edit(id):
 
 @auth.route('/delete/<id>')
 @login_required
+@role_required('admin')
 def delete(id):
     AuthController().delete(id)
     return redirect(url_for('auth.show_all'))

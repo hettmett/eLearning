@@ -60,8 +60,14 @@ class Lessons(Base):
         return DB.query(Lessons).filter(Lessons.id == id).first()
 
     @staticmethod
+<<<<<<< Updated upstream
     def get_all():
         try:
             DB.query(Lessons).all()
         except Exception:
             DB.rollback()
+=======
+    def get_all_by_teacher_id(teacher_id: int):
+        return DB.query(Lessons).filter(Lessons.id == id).first()
+
+>>>>>>> Stashed changes

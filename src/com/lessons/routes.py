@@ -1,43 +1,53 @@
+from os import path
 from com.auth.routes import login_required
 from flask import Blueprint, render_template, redirect, request, url_for, flash, send_from_directory
 from com.lessons.controller import LessonsController
+<<<<<<< Updated upstream
 from os import path
 
+=======
+>>>>>>> Stashed changes
 from com.quiz.controller import QuizController
 
 lessons = Blueprint("lessons", __name__, template_folder="templates", static_folder="static",
                     url_prefix="/lessons")
 
+
 @lessons.route('/<group_id>/<id>/add_question', methods=['GET', 'POST'])
 @login_required
-def add_question(group_id,id):
+def add_question(group_id, id):
     if request.method == 'POST':
         answers = []
         form = request.form
         question = form.get("question")
         answer1 = form.get("answer1")
         answer2 = form.get("answer2")
-        answer3 = form.get( "answer3" )
-        answer4 = form.get( "answer4" )
+        answer3 = form.get("answer3")
+        answer4 = form.get("answer4")
         answers.extend([answer1, answer2, answer3, answer4])
         right_ans = form.get("right_ans")
         QuizController().add_question(id, question, answers, right_ans)
+<<<<<<< Updated upstream
         return redirect( url_for( "lessons.add_question", group_id=group_id, id=id ) )
     return render_template("add_questions.html", group_id=group_id, id=id)
+=======
+        return redirect(url_for("lessons.edit", group_id=group_id, id=id))
+    return render_template("add_questions.html", id=id)
+>>>>>>> Stashed changes
 
 
 @lessons.route('/<group_id>/files/<filename>', methods=['GET', 'POST'])
 @login_required
-def download(group_id,filename):
-    dir = 'C:\\Users\\nareh\\Desktop\\Narek\\Python\\final_project\\EL\\src\\static\\files'
-    return send_from_directory( directory=dir, filename=filename)
+def download(group_id, filename):
+    dir = 'C:\\Program Files\\Python36\\Python_projects\\FLASK\\ACA\\eLearning\\src\\static\\uploaded_files'
+    return send_from_directory(directory=dir, filename=filename)
 
 @lessons.route("/<group_id>")
 @login_required
 def get_all(group_id):
     all_lessons = LessonsController().all(group_id)
-    print(f'all_lessons = {all_lessons}')
-    return render_template("all_lessons.html", all_lessons=all_lessons,group_id=group_id)
+    return render_template("all_lessons.html", all_lessons=all_lessons, group_id=group_id)
+
 
 @lessons.route('/<group_id>/new', methods=['GET', 'POST'])
 @login_required
@@ -45,9 +55,9 @@ def new(group_id):
     if request.method == 'POST':
         form = request.form
         group_id = group_id
-        title = form.get( "title" )
-        description = form.get( "description" )
-        lesson_date = form.get( "lesson_date" )
+        title = form.get("title")
+        description = form.get("description")
+        lesson_date = form.get("lesson_date")
         file = request.files['file']
         try:
             file_path = LessonsController().upload(file)
@@ -63,7 +73,6 @@ def new(group_id):
 def delete(group_id, id):
     LessonsController().delete(id)
     return redirect(url_for("lessons.get_all", group_id=group_id))
-
 
 
 @lessons.route("/<group_id>/edit/<id>", methods=["GET", "POST"])
@@ -82,6 +91,7 @@ def edit(group_id, id):
         except Exception as exception:
             flash(exception)
     return render_template("edit_lesson.html", group_id=group_id, lesson=lesson)
+
 
 @lessons.route("/<group_id>/<id>", methods=["GET", "POST"])
 @login_required

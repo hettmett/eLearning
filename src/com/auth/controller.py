@@ -1,7 +1,8 @@
 import re
 from flask_mail import Mail, Message
-from flask import session, current_app as app
+from flask import session, current_app as app, flash
 from com.auth.models.users import Users
+from com.groups.controller import GroupsController
 from conf import sys_conf
 from com.groups.controller import GroupsController
 
@@ -19,6 +20,7 @@ class AuthController(object):
             raise Exception('Email not valid')
         user = Users.login(email, pwd)
 
+<<<<<<< Updated upstream
         # group_name = GroupsController.get_all_groups_by_teacher(user.id)
         # course_name = GroupsController.get_course_name(user.id)
         # print(f'course_name = {course_name}, group_name = {group_name}')
@@ -29,6 +31,38 @@ class AuthController(object):
                                'fnm': user.first_name,
                                'lnm': user.last_name}
             print(f'session = {session["user"]}')
+=======
+        if user is not None:
+            session['user'] = {
+                'id': user.id,
+                'role': user.role,
+                'fnm': user.first_name,
+                'lnm': user.last_name}
+
+            if user.role == 'teacher':
+                group = GroupsController.get_all_groups_by_teacher(user.id)
+                course = GroupsController.get_coures(user.id)
+                session['group'] = {
+                    'id': group.id,
+                    'nm': group.group_name}
+                session['course'] = {
+                    'cm': course.course_name}
+
+            if user.role == 'student':
+                student_group = GroupsController.get_group(user.id)
+                course = GroupsController.get_coures_for_user(user.id)
+                session['group'] = {
+                    'id': student_group.id,
+                    'nm': student_group.group_name}
+                session['course'] = {
+                    'cm': course.course_name}
+
+                # student_group = GroupsController.get_group(user.id)
+                # for i, sg in enumerate(student_group):
+                #     tmp = {i: [sg.id, sg.group_name]}
+                #     session['group'].update(tmp)
+                # print(session['group'])
+>>>>>>> Stashed changes
             return True
         return False
     def send_mail(self, email, token):

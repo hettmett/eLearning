@@ -11,12 +11,35 @@
 
 
 {% block login_content %}
+<<<<<<< Updated upstream
+=======
+
+    <div class="row flash_message">
+        {% block exeption_flash %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li class="alert alert-warning"><h2 style="color: darkred;"> {{ message }} </h2>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        {% endblock %}
+    </div>
+
+>>>>>>> Stashed changes
     <div class="row">
         <div class="col-md-5"></div>
 
         <div class="col-md-3 col-sm-5 col-xs-6">
             <div class="mb-30">
+<<<<<<< Updated upstream
                 <h3 class="text-center txt-dark mb-10">Sign in to Droopy</h3>
+=======
+                <h3 class="text-center txt-dark mb-10">Sign in to eLearning</h3>
+>>>>>>> Stashed changes
                 <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
             </div>
             <div class="form-wrap">
@@ -35,10 +58,17 @@
                         <div class="clearfix"></div>
                         <input type="password" name="password" class="form-control" required autofocus
                                placeholder="Enter pwd">
+<<<<<<< Updated upstream
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-success">Sign In</button>
                     </div>
+=======
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success">Sign In</button>
+                    </div>
+>>>>>>> Stashed changes
                 </form>
             </div>
         </div>

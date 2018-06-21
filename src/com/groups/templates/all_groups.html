@@ -4,7 +4,7 @@
 {% block content %}
     <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">Courses DataTable</h5>
+            <h5 class="txt-dark">All groups table</h5>
         </div>
     </div>
 
@@ -18,33 +18,33 @@
                             <table id="myTable1" class="table table-hover display  pb-30">
                                 <thead>
                                 <tr>
-                                    <th> Title</th>
-                                    <th> Description</th>
-                                    <th> Teacher</th>
-                                    <th><a href="new" class="btn btn-primary" role="button">Create</a></th>
-                                    <th><a href="new_student" class="btn btn-primary" role="button">Add student</a></th>
-                                    <th></th>
+                                    <th> Title </th>
+                                    <th> Description </th>
+                                    <th> Teacher </th>
+                                    <th> </th>
+                                    <th> <a href="new" class="btn btn-primary" role="button">Create</a>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                {% for group_name in group_name %}
-                                    <tr>
-                                        <td> {{ group_name.group_name }}  </td>
-                                        <td> {{ group_name.course_name }} </td>
-                                        <td> {{ group_name.first_name }} </td>
-                                        <td>
-                                            <a href="edit/{{ group_name.id }}" class="btn btn-success" role="button">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="delete/{{ group_name.id }}" class="btn btn-danger" role="button">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    <td></td>
-                                    </tr>
-                                {% endfor %}
+                                    <tbody>
+                                    {% for group_name in group_name %}
+                                        <tr>
+                                            <td><a href="all_students_in/{{ group_name.id }}" class="btn btn-default">
+                                                {{ group_name.group_name }}
+                                            </a> </td>
+                                            <td> {{ group_name.course_name }} </td>
+                                            <td> {{ group_name.first_name }} </td>
+                                            <td>
+                                                <a href="edit/{{ group_name.id }}" class="btn btn-success" role="button">
+                                                    Edit
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="delete/{{ group_name.id }}" class="btn btn-danger" role="button">
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
